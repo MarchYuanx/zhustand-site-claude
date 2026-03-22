@@ -8,6 +8,8 @@ const Gallery = lazy(() => import('../pages/Gallery'))
 const Videos = lazy(() => import('../pages/Videos'))
 const Articles = lazy(() => import('../pages/Articles'))
 const ArticleDetail = lazy(() => import('../pages/ArticleDetail'))
+const About = lazy(() => import('../pages/About'))
+const Settings = lazy(() => import('../pages/Settings'))
 
 /**
  * 路由配置 - 采用懒加载 + 模块化设计
@@ -26,9 +28,10 @@ function AppRouter() {
         <Route path="/videos" element={<Videos />} />
         <Route path="/articles" element={<Articles />} />
         <Route path="/articles/:id" element={<ArticleDetail />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/settings" element={<Settings />} />
 
         {/* 扩展点：在此添加新路由 */}
-        {/* <Route path="/about" element={<About />} /> */}
       </Routes>
     </Suspense>
   )

@@ -4,7 +4,8 @@
       "Bash(npm create:*)",
       "Bash(pnpm install:*)",
       "Bash(lsof -ti:3000)",
-      "Bash(pnpm dev:*)"
+      "Bash(pnpm dev:*)",
+      "Bash(pnpm lint:*)"
     ]
   }
 }

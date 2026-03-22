@@ -17,6 +17,8 @@ function Header() {
     { path: '/gallery', label: 'Gallery' },
     { path: '/videos', label: 'Videos' },
     { path: '/articles', label: 'Articles' },
+    { path: '/about', label: 'About' },
+    { path: '/settings', label: 'Settings' },
   ]
 
   const isActive = (path) => location.pathname === path
@@ -34,7 +36,7 @@ function Header() {
   }
 
   // 创建单个星星元素
-  const createStar = (x, y, index) => {
+  const createStar = (x, y) => {
     const star = document.createElement('div')
     star.innerHTML = '★'
 

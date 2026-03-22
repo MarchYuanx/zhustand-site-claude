@@ -1,5 +1,6 @@
 import Header from './Header'
 import MusicPlayer from '../features/MusicPlayer'
+import { useMusic } from '../../contexts/MusicContext'
 
 /**
  * 页面布局容器
@@ -7,10 +8,12 @@ import MusicPlayer from '../features/MusicPlayer'
  * 功能：
  * - 统一页面结构（Header + 内容区）
  * - 提供一致的内边距和最大宽度
- * - 全局音乐播放器
+ * - 全局音乐播放器（根据设置显示/隐藏）
  * - 预留 Footer 扩展位置
  */
 function Layout({ children }) {
+  const { showPlayer } = useMusic()
+
   return (
     <div className="min-h-screen bg-surface-base">
       <Header />
@@ -20,8 +23,8 @@ function Layout({ children }) {
         {children}
       </main>
 
-      {/* 全局音乐播放器 */}
-      <MusicPlayer />
+      {/* 全局音乐播放器 - 根据设置显示 */}
+      {showPlayer && <MusicPlayer />}
 
       {/* 扩展点：Footer 组件 */}
       {/* <Footer /> */}

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { FaPlay, FaPause, FaMusic } from 'react-icons/fa'
+import { useMusic } from '../../contexts/MusicContext'
 
 /**
  * 背景音乐播放器 - Claude 风格 + 可折叠
@@ -12,23 +13,29 @@ import { FaPlay, FaPause, FaMusic } from 'react-icons/fa'
  * - 优雅的排版和间距
  * - 精致的交互动效
  * - 固定在页面右下角
- *
- * 扩展点：
- * - 修改 songInfo 更换歌曲信息
+ * - 支持从设置页面选择不同的音乐
  */
 function MusicPlayer() {
+  const { currentMusic } = useMusic()
   const audioRef = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
   const [isExpanded, setIsExpanded] = useState(true)
 
-  // 歌曲信息
-  const songInfo = {
-    name: '猛独が襲う',
-    artist: 'STUDY WITH MIKU',
-    url: 'https://music.163.com/song/media/outer/url?id=2053344480.mp3'
-  }
+  // 使用从 Context 获取的歌曲信息
+  const songInfo = currentMusic
+
+  // 当歌曲切换时，停止播放并重置状态
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.pause()
+      audioRef.current.currentTime = 0
+      setIsPlaying(false)
+      setCurrentTime(0)
+      setDuration(0)
+    }
+  }, [currentMusic.id])
 
   // 自动播放
   useEffect(() => {
