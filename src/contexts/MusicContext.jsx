@@ -12,24 +12,28 @@ import { createContext, useContext, useState, useEffect } from 'react'
 // 音乐列表配置
 export const MUSIC_LIST = [
   {
-    id: 1,
+    id: 26116122,
+    name: 'Stay Gold',
+    artist: '広橋真紀子',
+    url: 'https://music.163.com/song/media/outer/url?id=26116122.mp3',
+    isDefault: true // 默认播放的歌曲
+  },
+  {
+    id: 2053344480,
     name: '猛独が襲う',
     artist: 'STUDY WITH MIKU',
     url: 'https://music.163.com/song/media/outer/url?id=2053344480.mp3'
   },
   {
-    id: 2,
-    name: 'Stay Gold',
-    artist: '広橋真紀子',
-    url: 'https://music.163.com/song/media/outer/url?id=26116122.mp3'
-  },
-  {
-    id: 3,
-    name: 'Close to You',
-    artist: '宇多田ヒカル',
-    url: 'https://music.163.com/song/media/outer/url?id=667244.mp3'
+    id: 667244,
+    name: '银河鉄道の夜',
+    artist: '久石譲',
+    url: 'https://music.163.com/song/media/outer/url?id=445190.mp3'
   }
 ]
+
+// 默认歌曲 ID
+export const DEFAULT_MUSIC_ID = MUSIC_LIST.find(music => music.isDefault)?.id || MUSIC_LIST[0].id
 
 const MusicContext = createContext()
 
@@ -51,12 +55,12 @@ export function MusicProvider({ children }) {
     const saved = localStorage.getItem('musicSettings')
     if (saved) {
       try {
-        return JSON.parse(saved).selectedMusicId ?? 1
+        return JSON.parse(saved).selectedMusicId ?? DEFAULT_MUSIC_ID
       } catch {
-        return 1
+        return DEFAULT_MUSIC_ID
       }
     }
-    return 1
+    return DEFAULT_MUSIC_ID
   })
 
   // 保存设置到 localStorage
