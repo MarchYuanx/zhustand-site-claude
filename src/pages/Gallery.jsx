@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import ImageGrid from '../components/features/ImageGrid'
 import Loading from '../components/common/Loading'
 import { loadImages } from '../utils/fileLoader'
+import { getImageMetadata } from '../data/imageMetadata'
 
 /**
  * 图片作品展示页
@@ -22,7 +23,13 @@ function Gallery() {
   useEffect(() => {
     async function fetchImages() {
       const loadedImages = await loadImages()
-      setImages(loadedImages)
+      // 合并图片元数据
+      const imagesWithMetadata = loadedImages.map(image => {
+        const filename = image.src.split('/').pop()
+        const metadata = getImageMetadata(filename)
+        return { ...image, ...metadata }
+      })
+      setImages(imagesWithMetadata)
       setLoading(false)
     }
     fetchImages()
