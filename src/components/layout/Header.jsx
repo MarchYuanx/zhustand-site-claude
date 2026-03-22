@@ -21,7 +21,12 @@ function Header() {
     { path: '/settings', label: 'Settings' },
   ]
 
-  const isActive = (path) => location.pathname === path
+  const isActive = (path) => {
+    // 首页精确匹配
+    if (path === '/') return location.pathname === '/'
+    // 其他页面支持前缀匹配（如 /articles 匹配 /articles/xxx）
+    return location.pathname.startsWith(path)
+  }
 
   // 星星特效处理函数
   const handleLogoClick = (e) => {
