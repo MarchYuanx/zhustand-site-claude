@@ -38,6 +38,7 @@ function Gallery() {
           Gallery
         </h1>
         <p className="font-serif tracking-wide text-text-secondary">我的图片作品集</p>
+        <p className="mt-2 text-sm text-text-tertiary">Powered by Stable Diffusion</p>
       </div>
 
       {/* 扩展点：分类筛选组件插槽 */}
