@@ -34,7 +34,7 @@ function VideoCard({ url, title }) {
       <div className="relative aspect-video overflow-hidden rounded-xl bg-surface-elevated">
         {bvid ? (
           <iframe
-            src={`//player.bilibili.com/player.html?bvid=${bvid}&page=1&high_quality=1&danmaku=0`}
+            src={`//player.bilibili.com/player.html?bvid=${bvid}&page=1&high_quality=1&danmaku=0&autoplay=0`}
             scrolling="no"
             border="0"
             frameBorder="no"
