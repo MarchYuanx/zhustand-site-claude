@@ -60,9 +60,16 @@ function About() {
         </h1>
 
         {/* 简介文字 - 优雅字体 */}
-        <p className="mb-12 text-center font-serif text-xl tracking-wide text-text-secondary md:text-2xl">
-          这个人很懒什么都没有留下
-        </p>
+        <div className="mb-12 space-y-4 text-center">
+          <p className="font-serif text-xl tracking-wide text-text-secondary md:text-2xl">
+            Hi, I'm March Yuan
+          </p>
+          <p className="mx-auto max-w-2xl text-base leading-relaxed text-text-tertiary md:text-lg">
+            一个热爱创作的开发者，喜欢用代码和镜头记录生活。
+            <br />
+            在这里分享我的作品、想法和日常。
+          </p>
+        </div>
 
         {/* 社交信息卡片网格 */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
