@@ -1,0 +1,95 @@
+/* Tailwind 基础指令 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 全局基础样式 - 美式 App 审美 */
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+    /* 为滚动条预留空间，避免内容跳动 */
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    @apply bg-surface-base text-text-primary font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* 自定义滚动条样式 - 美式极简风格 */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
+  }
+
+  /* Firefox 滚动条样式 */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(209 213 219) rgb(243 244 246);
+  }
+}
+
+/* 自定义复用组件样式 - 使用 @apply 封装 */
+@layer components {
+  /* 通用按钮样式 */
+  .btn-primary {
+    @apply rounded-xl bg-primary px-6 py-3 font-medium text-white transition-all duration-200 hover:scale-105 hover:shadow-card active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply rounded-xl border border-border bg-surface-elevated px-6 py-3 font-medium text-text-primary transition-all duration-200 hover:scale-105 hover:shadow-soft active:scale-95;
+  }
+
+  /* 通用卡片样式 */
+  .card {
+    @apply rounded-2xl bg-surface-base p-6 shadow-card transition-all duration-300 hover:shadow-modal;
+  }
+
+  /* 链接悬停效果 */
+  .link-hover {
+    @apply transition-all duration-200 hover:scale-110 hover:text-primary;
+  }
+}
+
+/* 工具类扩展 */
+@layer utilities {
+  /* 文本渐变效果 */
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent;
+  }
+
+  /* 玻璃态效果 */
+  .glass {
+    @apply bg-white/80 backdrop-blur-md;
+  }
+
+  /* 星星爆炸动画 */
+  @keyframes starBurst {
+    0% {
+      transform: translate(0, 0) scale(1) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(var(--tx), var(--ty)) scale(0) rotate(180deg);
+      opacity: 0;
+    }
+  }
+}
