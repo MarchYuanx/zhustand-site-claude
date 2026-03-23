@@ -182,78 +182,78 @@ function ArticleDetail() {
             rehypePlugins={[rehypeHighlight]}
             components={{
               // 标题渲染 - 添加 id 用于目录跳转
-              h1: ({ node, children, ...props }) => {
+              h1: ({ children, ...props }) => {
                 const id = children?.toString().toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-\u4e00-\u9fa5]/g, '')
                 return <h1 id={id} className="mb-6 mt-8 scroll-mt-24 font-serif text-3xl font-bold tracking-tight text-text-primary" {...props}>{children}</h1>
               },
-              h2: ({ node, children, ...props }) => {
+              h2: ({ children, ...props }) => {
                 const id = children?.toString().toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-\u4e00-\u9fa5]/g, '')
                 return <h2 id={id} className="mb-4 mt-8 scroll-mt-24 font-serif text-2xl font-bold tracking-tight text-text-primary" {...props}>{children}</h2>
               },
-              h3: ({ node, children, ...props }) => {
+              h3: ({ children, ...props }) => {
                 const id = children?.toString().toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-\u4e00-\u9fa5]/g, '')
                 return <h3 id={id} className="mb-3 mt-6 scroll-mt-24 font-serif text-xl font-semibold tracking-wide text-text-primary" {...props}>{children}</h3>
               },
               // 段落渲染
-              p: ({ node, ...props }) => (
+              p: (props) => (
                 <p className="mb-4 leading-relaxed text-text-secondary" {...props} />
               ),
               // 列表渲染
-              ul: ({ node, ...props }) => (
+              ul: (props) => (
                 <ul className="mb-4 ml-6 list-disc space-y-2 text-text-secondary" {...props} />
               ),
-              ol: ({ node, ...props }) => (
+              ol: (props) => (
                 <ol className="mb-4 ml-6 list-decimal space-y-2 text-text-secondary" {...props} />
               ),
-              li: ({ node, ...props }) => (
+              li: (props) => (
                 <li className="leading-relaxed" {...props} />
               ),
               // 代码块渲染
-              code: ({ node, inline, ...props }) =>
+              code: ({ inline, ...props }) =>
                 inline ? (
                   <code className="rounded bg-surface-elevated px-1.5 py-0.5 font-mono text-sm text-primary" {...props} />
                 ) : (
                   <code className="block rounded-xl bg-surface-elevated p-4 font-mono text-sm leading-relaxed" {...props} />
                 ),
-              pre: ({ node, ...props }) => (
+              pre: (props) => (
                 <pre className="mb-4 overflow-x-auto rounded-xl bg-surface-elevated p-4 shadow-soft" {...props} />
               ),
               // 引用块渲染
-              blockquote: ({ node, ...props }) => (
+              blockquote: (props) => (
                 <blockquote className="mb-4 border-l-4 border-primary bg-surface-elevated pl-4 py-2 italic text-text-secondary" {...props} />
               ),
               // 表格渲染
-              table: ({ node, ...props }) => (
+              table: (props) => (
                 <div className="mb-4 overflow-x-auto rounded-xl shadow-soft">
                   <table className="w-full border-collapse" {...props} />
                 </div>
               ),
-              thead: ({ node, ...props }) => (
+              thead: (props) => (
                 <thead className="bg-surface-elevated" {...props} />
               ),
-              th: ({ node, ...props }) => (
+              th: (props) => (
                 <th className="border border-border px-4 py-2 text-left font-semibold text-text-primary" {...props} />
               ),
-              td: ({ node, ...props }) => (
+              td: (props) => (
                 <td className="border border-border px-4 py-2 text-text-secondary" {...props} />
               ),
               // 分割线渲染
-              hr: ({ node, ...props }) => (
+              hr: (props) => (
                 <hr className="my-8 border-border" {...props} />
               ),
               // 图片渲染 - 响应式适配
-              img: ({ node, ...props }) => (
+              img: (props) => (
                 <img {...props} className="my-4 rounded-xl shadow-card" loading="lazy" />
               ),
               // 链接渲染
-              a: ({ node, ...props }) => (
+              a: (props) => (
                 <a {...props} className="font-medium text-primary transition-colors hover:underline" target="_blank" rel="noopener noreferrer" />
               ),
               // 强调文本
-              strong: ({ node, ...props }) => (
+              strong: (props) => (
                 <strong className="font-semibold text-text-primary" {...props} />
               ),
-              em: ({ node, ...props }) => (
+              em: (props) => (
                 <em className="italic text-text-secondary" {...props} />
               ),
             }}

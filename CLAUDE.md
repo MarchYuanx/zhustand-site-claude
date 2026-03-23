@@ -128,6 +128,63 @@ src/
 
 ## 前端开发规范
 
+### 语言选择：优先使用 TypeScript
+
+作为资深前端工程师，我强烈建议在所有新项目和重构中优先使用 TypeScript 而非 JavaScript。
+
+**为什么选择 TypeScript：**
+
+1. **类型安全**：编译时捕获错误，减少 90% 的运行时类型错误
+2. **更好的 IDE 支持**：智能提示、自动补全、重构工具
+3. **代码可维护性**：类型即文档，降低团队协作成本
+4. **重构信心**：类型系统保证重构的安全性
+5. **渐进式采用**：可以从 .js 逐步迁移到 .ts
+
+**TypeScript 最佳实践：**
+
+```typescript
+// ✅ 推荐：明确的类型定义
+interface UserProps {
+  id: string
+  name: string
+  email: string
+  role: 'admin' | 'user' | 'guest'
+}
+
+function UserCard({ id, name, email, role }: UserProps) {
+  // 组件实现
+}
+
+// ✅ 推荐：使用类型推断
+const users = ['Alice', 'Bob'] // 自动推断为 string[]
+const count = 42 // 自动推断为 number
+
+// ❌ 避免：使用 any 类型
+function processData(data: any) { // 不推荐
+  // ...
+}
+
+// ✅ 推荐：使用泛型或 unknown
+function processData<T>(data: T) {
+  // ...
+}
+```
+
+**类型定义规范：**
+
+- 组件 Props 使用 `interface` 定义（便于扩展）
+- 工具函数参数和返回值必须有类型注解
+- 复杂类型抽取到 `types/` 目录统一管理
+- 使用 `readonly` 标记不可变数据
+- 优先使用联合类型而非枚举（更轻量）
+
+**迁移策略：**
+
+1. 新组件直接使用 `.tsx` 扩展名
+2. 重构时将 `.jsx` 改为 `.tsx`，逐步添加类型
+3. 使用 `// @ts-check` 在 .js 文件中启用类型检查
+4. 配置 `tsconfig.json` 的 `strict: true`
+
 ### 代码风格
 
 **命名规范：**

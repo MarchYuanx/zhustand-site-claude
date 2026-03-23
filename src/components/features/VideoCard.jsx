@@ -53,7 +53,6 @@ function VideoCard({ url, title }) {
             scrolling="no"
             border="0"
             frameBorder="no"
-            framespacing="0"
             allowFullScreen={true}
             className="absolute left-0 top-0 h-full w-full"
             title={title}
