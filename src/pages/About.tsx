@@ -1,7 +1,5 @@
-import { useState, useEffect } from 'react'
 import { FaGithub, FaEnvelope } from 'react-icons/fa'
 import { SiBilibili, SiXiaohongshu } from 'react-icons/si'
-import { getBilibiliUserInfo, formatNumber } from '../utils/bilibiliApi'
 
 /**
  * About Me 页面 - 美式极简风格
@@ -11,24 +9,8 @@ import { getBilibiliUserInfo, formatNumber } from '../utils/bilibiliApi'
  * - 简洁的自我介绍
  * - 卡片式社交信息展示
  * - 柔和的视觉效果
- * - 展示 B 站实时粉丝数
  */
 function About() {
-  const [bilibiliFollower, setBilibiliFollower] = useState<number | null>(null)
-  const [loading, setLoading] = useState(true)
-
-  // 获取 B 站用户信息
-  useEffect(() => {
-    async function fetchBilibiliInfo() {
-      const userInfo = await getBilibiliUserInfo(17178880)
-      if (userInfo) {
-        setBilibiliFollower(userInfo.follower)
-      }
-      setLoading(false)
-    }
-    fetchBilibiliInfo()
-  }, [])
-
   const socialCards = [
     {
       name: 'GitHub',
@@ -57,7 +39,6 @@ function About() {
       url: 'https://space.bilibili.com/17178880',
       icon: SiBilibili,
       color: 'text-[#00A1D6]',
-      follower: bilibiliFollower,
     },
   ]
 
@@ -107,19 +88,6 @@ function About() {
                 <p className="w-full break-all text-center text-xs text-text-tertiary transition-colors duration-200 group-hover:text-text-secondary">
                   {card.username}
                 </p>
-
-                {/* B 站粉丝数 */}
-                {card.name === 'B站' && (
-                  <div className="mt-2 text-center">
-                    {loading ? (
-                      <div className="h-4 w-16 animate-pulse rounded bg-gray-200"></div>
-                    ) : card.follower !== null && card.follower !== undefined ? (
-                      <p className="text-sm font-medium text-text-secondary">
-                        {formatNumber(card.follower)} 粉丝
-                      </p>
-                    ) : null}
-                  </div>
-                )}
               </a>
             )
           })}
