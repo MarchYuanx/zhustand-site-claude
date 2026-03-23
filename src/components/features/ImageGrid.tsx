@@ -129,7 +129,7 @@ function ImageGrid({ images }: ImageGridProps) {
                   <label className="text-sm font-medium text-text-secondary">Prompt</label>
                   {selectedImage.prompt && (
                     <button
-                      onClick={() => copyToClipboard(selectedImage.prompt, 'prompt')}
+                      onClick={() => copyToClipboard(selectedImage.prompt!, 'prompt')}
                       className="rounded p-1 text-text-tertiary transition-colors hover:bg-surface-elevated hover:text-text-primary"
                       title="Copy prompt"
                     >
@@ -150,7 +150,7 @@ function ImageGrid({ images }: ImageGridProps) {
                   <label className="text-sm font-medium text-text-secondary">Negative Prompt</label>
                   {selectedImage.negativePrompt && (
                     <button
-                      onClick={() => copyToClipboard(selectedImage.negativePrompt, 'negativePrompt')}
+                      onClick={() => copyToClipboard(selectedImage.negativePrompt!, 'negativePrompt')}
                       className="rounded p-1 text-text-tertiary transition-colors hover:bg-surface-elevated hover:text-text-primary"
                       title="Copy negative prompt"
                     >
