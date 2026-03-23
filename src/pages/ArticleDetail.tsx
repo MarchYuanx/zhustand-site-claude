@@ -217,7 +217,7 @@ function ArticleDetail() {
                 <li className="leading-relaxed" {...props} />
               ),
               // 代码块渲染
-              code: ({ inline, ...props }) =>
+              code: ({ inline, ...props }: any) =>
                 inline ? (
                   <code className="rounded bg-surface-elevated px-1.5 py-0.5 font-mono text-sm text-primary" {...props} />
                 ) : (

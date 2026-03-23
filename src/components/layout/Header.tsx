@@ -56,7 +56,7 @@ function Header() {
 
     // 创建 8 个星星
     for (let i = 0; i < 8; i++) {
-      createStar(rect.left + x, rect.top + y, i)
+      createStar(rect.left + x, rect.top + y)
     }
   }
 

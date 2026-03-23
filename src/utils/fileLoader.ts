@@ -12,6 +12,9 @@ export interface ImageData {
   src: string
   name: string
   alt: string
+  prompt?: string
+  negativePrompt?: string
+  lora?: string
 }
 
 export interface ArticleData {
