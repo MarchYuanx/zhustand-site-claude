@@ -15,33 +15,44 @@ interface SEOProps {
 const SEO = ({
   title = '个人作品集',
   description = '展示我的创意作品、技术项目和文章分享',
-  keywords = 'portfolio, 作品集, 前端开发, React, 设计',
-  image = '/og-image.jpg',
-  url = 'https://yoursite.com',
+  keywords = 'portfolio, AI, 作品集, 前端开发, React, 设计',
+  image = 'https://zhustand-site-claude.vercel.app/og-image.jpg',
+  url = 'https://zhustand-site-claude.vercel.app',
   type = 'website',
-  author = 'Your Name',
+  author = 'Zhustand',
   publishedTime,
   modifiedTime,
 }: SEOProps) => {
-  const siteTitle = '个人作品集';
-  const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
+  const siteTitle = 'Zhustand';
+  const fullTitle = title === siteTitle ? title : `${siteTitle} | ${title}`;
 
   // 结构化数据（JSON-LD）
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': type === 'article' ? 'Article' : 'WebSite',
-    name: fullTitle,
-    description,
-    url,
-    author: {
-      '@type': 'Person',
-      name: author,
-    },
-    ...(type === 'article' && publishedTime && {
-      datePublished: publishedTime,
-      dateModified: modifiedTime || publishedTime,
-    }),
-  };
+  const structuredData =
+    type === 'article'
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: fullTitle,
+          description,
+          image,
+          datePublished: publishedTime,
+          dateModified: modifiedTime || publishedTime,
+          author: {
+            '@type': 'Person',
+            name: author,
+          },
+        }
+      : {
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          name: siteTitle,
+          description,
+          url,
+          author: {
+            '@type': 'Person',
+            name: author,
+          },
+        };
 
   return (
     <Helmet>
@@ -50,20 +61,26 @@ const SEO = ({
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
       <meta name="author" content={author} />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="canonical" href={url} />
 
       {/* Open Graph 标签（社交媒体分享） */}
       <meta property="og:type" content={type} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
       <meta property="og:url" content={url} />
       <meta property="og:site_name" content={siteTitle} />
+      <meta property="og:locale" content="zh_CN" />
 
       {/* Twitter Card 标签 */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
+      <meta name="twitter:image:alt" content={fullTitle} />
 
       {/* 文章特定标签 */}
       {type === 'article' && publishedTime && (
