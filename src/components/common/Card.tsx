@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react'
+import { motion, HTMLMotionProps } from 'framer-motion'
 
 /**
  * 通用卡片组件 - 美式设计风格
@@ -11,19 +11,22 @@ import { HTMLAttributes } from 'react'
  * 扩展点：可添加 padding、shadow 等变体
  */
 
-interface CardProps extends HTMLAttributes<HTMLDivElement> {
+interface CardProps extends Omit<HTMLMotionProps<'div'>, 'children'> {
   children: React.ReactNode
   hover?: boolean
 }
 
 function Card({ children, className = '', hover = true, ...props }: CardProps) {
   return (
-    <div
-      className={`card ${hover ? 'hover:scale-[1.02]' : ''} ${className}`}
+    <motion.div
+      className={`card ${className}`}
+      whileHover={hover ? { scale: 1.02 } : {}}
+      whileTap={hover ? { scale: 0.98 } : {}}
+      transition={{ duration: 0.2 }}
       {...props}
     >
       {children}
-    </div>
+    </motion.div>
   )
 }
 

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { FiCopy, FiCheck } from 'react-icons/fi'
 import type { ImageData } from '../../utils/fileLoader'
+import { staggerContainer, fadeInUpVariants, overlayVariants } from '../../config/animations'
 
 /**
  * 图片网格组件 - 美式网格布局
@@ -54,33 +56,53 @@ function ImageGrid({ images }: ImageGridProps) {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <motion.div
+        className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+        variants={staggerContainer}
+        initial="hidden"
+        animate="visible"
+      >
         {images.map((image: ImageData, index: number) => (
-          <div
+          <motion.div
             key={index}
-            className="group cursor-pointer overflow-hidden rounded-2xl bg-surface-elevated shadow-soft transition-all duration-300 hover:scale-105 hover:shadow-card"
+            variants={fadeInUpVariants}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            className="group cursor-pointer overflow-hidden rounded-2xl bg-surface-elevated shadow-soft"
             onClick={() => setSelectedImage(image)}
           >
-            <img
+            <motion.img
               src={image.src}
               alt={image.alt || `Image ${index + 1}`}
               loading="lazy"
-              className="h-64 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+              className="h-64 w-full object-cover"
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.3 }}
             />
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* 全屏预览弹窗 - 左右布局 */}
-      {selectedImage && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-6 backdrop-blur-sm"
-          onClick={() => setSelectedImage(null)}
-        >
-          <div
-            className="relative flex h-[85vh] w-full max-w-7xl gap-6 overflow-hidden rounded-2xl bg-surface-base shadow-modal"
-            onClick={(e) => e.stopPropagation()}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-6 backdrop-blur-sm"
+            onClick={() => setSelectedImage(null)}
+            variants={overlayVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            transition={{ duration: 0.2 }}
           >
+            <motion.div
+              className="relative flex h-[85vh] w-full max-w-7xl gap-6 overflow-hidden rounded-2xl bg-surface-base shadow-modal"
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
             {/* 关闭按钮 */}
             <button
               onClick={() => setSelectedImage(null)}
@@ -173,9 +195,10 @@ function ImageGrid({ images }: ImageGridProps) {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
+      </AnimatePresence>
     </>
   )
 }

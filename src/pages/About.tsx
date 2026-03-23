@@ -2,6 +2,7 @@ import GitHubContributions from '../components/features/GitHubContributions'
 import SocialLinks from '../components/features/SocialLinks'
 import SEO from '../components/common/SEO'
 import { SEO_CONFIG, SITE_INFO } from '../constants/seo'
+import PageTransition from '../components/common/PageTransition'
 
 /**
  * About Me 页面 - 美式极简风格
@@ -15,7 +16,7 @@ import { SEO_CONFIG, SITE_INFO } from '../constants/seo'
  */
 function About() {
   return (
-    <>
+    <PageTransition>
       <SEO
         title={SEO_CONFIG.about.title}
         description={SEO_CONFIG.about.description}
@@ -57,7 +58,7 @@ function About() {
         </div>
       </div>
     </div>
-    </>
+    </PageTransition>
   )
 }
 

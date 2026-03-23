@@ -8,6 +8,7 @@ import { loadArticles } from '../utils/fileLoader'
 import type { ArticleData } from '../utils/fileLoader'
 import SEO from '../components/common/SEO'
 import { SITE_INFO } from '../constants/seo'
+import PageTransition from '../components/common/PageTransition'
 import 'highlight.js/styles/github.css'
 
 /**
@@ -106,7 +107,7 @@ function ArticleDetail() {
   }
 
   return (
-    <>
+    <PageTransition>
       <SEO
         title={article.title}
         description={article.content.substring(0, 150)}
@@ -287,7 +288,7 @@ function ArticleDetail() {
       {/* 扩展点：评论/点赞组件插槽 */}
       {/* <Comments articleId={article.id} /> */}
       </div>
-    </>
+    </PageTransition>
   )
 }
 

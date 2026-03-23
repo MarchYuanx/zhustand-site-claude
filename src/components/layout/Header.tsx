@@ -1,8 +1,10 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { HiMenu, HiX, HiSun, HiMoon } from 'react-icons/hi'
 import { NAV_ITEMS, Z_INDEX, ANIMATION_DURATION, STAR_EFFECT } from '../../constants'
 import { useThemeStore } from '../../stores/themeStore'
+import { mobileMenuVariants, mobileMenuTransition, overlayVariants } from '../../config/animations'
 
 /**
  * 顶部导航组件 - 美式极简风格
@@ -164,26 +166,29 @@ function Header() {
       </header>
 
       {/* 移动端侧边栏菜单 */}
-      <div
-        className={`fixed inset-0 transition-opacity md:hidden ${
-          isMobileMenuOpen
-            ? 'pointer-events-auto opacity-100'
-            : 'pointer-events-none opacity-0'
-        }`}
-        style={{ zIndex: Z_INDEX.MOBILE_MENU_OVERLAY, transitionDuration: `${ANIMATION_DURATION.NORMAL}ms` }}
-      >
-        {/* 背景遮罩 */}
-        <div
-          className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            className="fixed inset-0 md:hidden"
+            style={{ zIndex: Z_INDEX.MOBILE_MENU_OVERLAY }}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+          >
+            {/* 背景遮罩 */}
+            <motion.div
+              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+              onClick={() => setIsMobileMenuOpen(false)}
+              variants={overlayVariants}
+              transition={{ duration: 0.2 }}
+            />
 
-        {/* 侧边栏内容 */}
-        <div
-          className={`absolute right-0 top-0 h-full w-64 bg-white shadow-modal transition-transform duration-300 dark:bg-gray-800 ${
-            isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
-        >
+            {/* 侧边栏内容 */}
+            <motion.div
+              className="absolute right-0 top-0 h-full w-64 bg-white shadow-modal dark:bg-gray-800"
+              variants={mobileMenuVariants}
+              transition={mobileMenuTransition}
+            >
           {/* 关闭按钮 */}
           <div className="flex items-center justify-between border-b border-border/50 px-6 py-4 dark:border-gray-700">
             <span className="font-serif text-lg font-bold text-text-primary dark:text-gray-100">
@@ -215,8 +220,10 @@ function Header() {
               </li>
             ))}
           </ul>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }

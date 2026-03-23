@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
 import Loading from '../components/common/Loading'
 import { ROUTES } from '../constants'
 
@@ -22,22 +23,26 @@ const NotFound = lazy(() => import('../pages/NotFound'))
  * 3. 路由守卫：在此添加权限验证逻辑
  */
 function AppRouter() {
+  const location = useLocation()
+
   return (
     <Suspense fallback={<Loading />}>
-      <Routes>
-        <Route path={ROUTES.HOME} element={<Home />} />
-        <Route path={ROUTES.GALLERY} element={<Gallery />} />
-        <Route path={ROUTES.VIDEOS} element={<Videos />} />
-        <Route path={ROUTES.ARTICLES} element={<Articles />} />
-        <Route path={ROUTES.ARTICLE_DETAIL} element={<ArticleDetail />} />
-        <Route path={ROUTES.ABOUT} element={<About />} />
-        <Route path={ROUTES.SETTINGS} element={<Settings />} />
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path={ROUTES.HOME} element={<Home />} />
+          <Route path={ROUTES.GALLERY} element={<Gallery />} />
+          <Route path={ROUTES.VIDEOS} element={<Videos />} />
+          <Route path={ROUTES.ARTICLES} element={<Articles />} />
+          <Route path={ROUTES.ARTICLE_DETAIL} element={<ArticleDetail />} />
+          <Route path={ROUTES.ABOUT} element={<About />} />
+          <Route path={ROUTES.SETTINGS} element={<Settings />} />
 
-        {/* 扩展点：在此添加新路由 */}
+          {/* 扩展点：在此添加新路由 */}
 
-        {/* 404 页面 - 通配符路由，必须放在最后 */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          {/* 404 页面 - 通配符路由，必须放在最后 */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </AnimatePresence>
     </Suspense>
   )
 }

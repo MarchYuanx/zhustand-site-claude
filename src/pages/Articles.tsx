@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import Card from '../components/common/Card'
 import Loading from '../components/common/Loading'
 import { loadArticles } from '../utils/fileLoader'
 import type { ArticleData } from '../utils/fileLoader'
 import SEO from '../components/common/SEO'
 import { SEO_CONFIG, SITE_INFO } from '../constants/seo'
+import PageTransition from '../components/common/PageTransition'
+import { staggerContainer, fadeInUpVariants } from '../config/animations'
 
 /**
  * 文章列表页
@@ -36,7 +39,7 @@ function Articles() {
   if (loading) return <Loading />
 
   return (
-    <>
+    <PageTransition>
       <SEO
         title={SEO_CONFIG.articles.title}
         description={SEO_CONFIG.articles.description}
@@ -61,28 +64,35 @@ function Articles() {
 
       {/* 文章列表 - 两栏布局 */}
       {articles.length > 0 ? (
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <motion.div
+          className="grid grid-cols-1 gap-8 md:grid-cols-2"
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
           {articles.map((article) => (
-            <Link key={article.id} to={`/articles/${article.id}`}>
-              <Card className="h-full transition-all hover:border-primary dark:hover:border-primary">
-                <h2 className="mb-2 font-serif text-2xl font-bold tracking-tight text-text-primary dark:text-gray-100">
-                  {article.title}
-                </h2>
-                <p className="mb-4 line-clamp-2 text-text-secondary dark:text-gray-400">
-                  {article.content.substring(0, 150)}...
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-sm tabular-nums text-text-tertiary dark:text-gray-500">
-                    {article.date}
-                  </span>
-                  <span className="font-serif text-sm font-medium tracking-wide text-primary">
-                    阅读更多 →
-                  </span>
-                </div>
-              </Card>
-            </Link>
+            <motion.div key={article.id} variants={fadeInUpVariants}>
+              <Link to={`/articles/${article.id}`}>
+                <Card className="h-full transition-all hover:border-primary dark:hover:border-primary">
+                  <h2 className="mb-2 font-serif text-2xl font-bold tracking-tight text-text-primary dark:text-gray-100">
+                    {article.title}
+                  </h2>
+                  <p className="mb-4 line-clamp-2 text-text-secondary dark:text-gray-400">
+                    {article.content.substring(0, 150)}...
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-sm tabular-nums text-text-tertiary dark:text-gray-500">
+                      {article.date}
+                    </span>
+                    <span className="font-serif text-sm font-medium tracking-wide text-primary">
+                      阅读更多 →
+                    </span>
+                  </div>
+                </Card>
+              </Link>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       ) : (
         <div className="py-20 text-center">
           <p className="text-text-secondary dark:text-gray-400">暂无文章</p>
@@ -92,7 +102,7 @@ function Articles() {
         </div>
       )}
     </div>
-    </>
+    </PageTransition>
   )
 }
 

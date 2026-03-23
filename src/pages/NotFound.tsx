@@ -2,13 +2,14 @@ import { Link } from 'react-router-dom';
 import { HiHome } from 'react-icons/hi';
 import SEO from '../components/common/SEO';
 import { SITE_INFO } from '../constants/seo';
+import PageTransition from '../components/common/PageTransition';
 
 /**
  * 404 页面 - 极简风格
  */
 function NotFound() {
   return (
-    <>
+    <PageTransition>
       <SEO
         title="404"
         description="Page not found"
@@ -32,7 +33,7 @@ function NotFound() {
           </Link>
         </div>
       </div>
-    </>
+    </PageTransition>
   );
 }
 

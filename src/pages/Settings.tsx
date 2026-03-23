@@ -2,6 +2,7 @@ import { useMusicStore } from '../stores/musicStore'
 import { FaMusic, FaCheck } from 'react-icons/fa'
 import SEO from '../components/common/SEO'
 import { SEO_CONFIG, SITE_INFO } from '../constants/seo'
+import PageTransition from '../components/common/PageTransition'
 
 /**
  * 设置页面
@@ -16,7 +17,7 @@ function Settings() {
   const musicList = useMusicStore((state) => state.getMusicList())
 
   return (
-    <>
+    <PageTransition>
       <SEO
         title={SEO_CONFIG.settings.title}
         description={SEO_CONFIG.settings.description}
@@ -104,7 +105,7 @@ function Settings() {
         </div>
       </div>
     </div>
-    </>
+    </PageTransition>
   )
 }
 

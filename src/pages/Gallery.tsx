@@ -6,6 +6,7 @@ import type { ImageData } from '../utils/fileLoader'
 import { getImageMetadata } from '../constants/imageMetadata'
 import SEO from '../components/common/SEO'
 import { SEO_CONFIG, SITE_INFO } from '../constants/seo'
+import PageTransition from '../components/common/PageTransition'
 
 /**
  * 图片作品展示页
@@ -41,7 +42,7 @@ function Gallery() {
   if (loading) return <Loading />
 
   return (
-    <>
+    <PageTransition>
       <SEO
         title={SEO_CONFIG.gallery.title}
         description={SEO_CONFIG.gallery.description}
@@ -75,7 +76,7 @@ function Gallery() {
         </div>
       )}
       </div>
-    </>
+    </PageTransition>
   )
 }
 

@@ -1,7 +1,9 @@
+import { motion } from 'framer-motion'
 import SocialLinks from '../components/features/SocialLinks'
 import { TECH_STACK } from '../constants'
 import SEO from '../components/common/SEO'
 import { SEO_CONFIG, SITE_INFO } from '../constants/seo'
+import PageTransition from '../components/common/PageTransition'
 
 /**
  * 首页 Hero 模块 - 美式极简风格
@@ -18,7 +20,7 @@ import { SEO_CONFIG, SITE_INFO } from '../constants/seo'
  */
 function Home() {
   return (
-    <>
+    <PageTransition>
       <SEO
         title={SEO_CONFIG.home.title}
         description={SEO_CONFIG.home.description}
@@ -31,19 +33,36 @@ function Home() {
       {/* Hero 内容区 */}
       <div className="text-center">
         {/* 姓名 - 视觉焦点 - 艺术字体 */}
-        <h1 className="group relative mb-6 font-serif text-7xl font-bold tracking-tight md:text-8xl lg:text-9xl">
-          {/* 渐变文字效果 */}
-          <span className="inline-block bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-transparent transition-transform duration-500 group-hover:-translate-x-2 dark:from-gray-100 dark:via-gray-300 dark:to-gray-100">
-            Zhu
-          </span>
-          <span className="inline-block bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-transparent transition-transform duration-500 group-hover:translate-x-2 dark:from-gray-100 dark:via-gray-300 dark:to-gray-100">
-            stand
-          </span>
-          {/* 微妙的文字阴影 - 保持静止 */}
-          <span className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-100/30 via-purple-100/20 to-pink-100/30 bg-clip-text text-transparent blur-2xl dark:from-blue-900/30 dark:via-purple-900/20 dark:to-pink-900/30">
-            Zhustand
-          </span>
-        </h1>
+        <motion.h1
+          className="relative mb-6 font-serif text-7xl font-bold tracking-tight md:text-8xl lg:text-9xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <motion.div className="inline-block" whileHover="hover" initial="rest" animate="rest">
+            {/* 渐变文字效果 */}
+            <motion.span
+              className="inline-block bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-transparent dark:from-gray-100 dark:via-gray-300 dark:to-gray-100"
+              variants={{
+                rest: { x: 0 },
+                hover: { x: -8 }
+              }}
+              transition={{ duration: 0.3 }}
+            >
+              Zhu
+            </motion.span>
+            <motion.span
+              className="inline-block bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-transparent dark:from-gray-100 dark:via-gray-300 dark:to-gray-100"
+              variants={{
+                rest: { x: 0 },
+                hover: { x: 8 }
+              }}
+              transition={{ duration: 0.3 }}
+            >
+              stand
+            </motion.span>
+          </motion.div>
+        </motion.h1>
 
         {/* 职业描述 - 次级信息 - 优雅字体 */}
         <p className="mb-12 font-serif text-xl tracking-widest text-text-secondary md:text-2xl dark:text-gray-400">
@@ -80,7 +99,7 @@ function Home() {
         </div>
       </div>
     </div>
-    </>
+    </PageTransition>
   )
 }
 
