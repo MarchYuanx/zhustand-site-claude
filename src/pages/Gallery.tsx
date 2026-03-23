@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import ImageGrid from '../components/features/ImageGrid'
 import Loading from '../components/common/Loading'
-import { loadImages } from '../utils/fileLoader'
+import { loadImages, ImageData } from '../utils/fileLoader'
 import { getImageMetadata } from '../data/imageMetadata'
 
 /**
@@ -17,15 +17,15 @@ import { getImageMetadata } from '../data/imageMetadata'
  * - 预留标签管理功能
  */
 function Gallery() {
-  const [images, setImages] = useState([])
+  const [images, setImages] = useState<ImageData[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function fetchImages() {
       const loadedImages = await loadImages()
       // 合并图片元数据
-      const imagesWithMetadata = loadedImages.map(image => {
-        const filename = image.src.split('/').pop()
+      const imagesWithMetadata = loadedImages.map((image: ImageData) => {
+        const filename = image.src.split('/').pop() || ''
         const metadata = getImageMetadata(filename)
         return { ...image, ...metadata }
       })

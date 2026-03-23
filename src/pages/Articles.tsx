@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Card from '../components/common/Card'
 import Loading from '../components/common/Loading'
-import { loadArticles } from '../utils/fileLoader'
+import { loadArticles, ArticleData } from '../utils/fileLoader'
 
 /**
  * 文章列表页
@@ -18,7 +18,7 @@ import { loadArticles } from '../utils/fileLoader'
  * - 预留点赞功能
  */
 function Articles() {
-  const [articles, setArticles] = useState([])
+  const [articles, setArticles] = useState<ArticleData[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
