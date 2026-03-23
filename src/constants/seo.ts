@@ -16,7 +16,7 @@ export const SITE_INFO = {
   logo: 'https://zhustand-site-claude.vercel.app/logo.png', // 网站 logo
   socialLinks: {
     github: 'https://github.com/MarchYuanx',
-    bilibili: 'https://space.bilibili.com/your-uid',
+    bilibili: 'https://space.bilibili.com/17178880',
   },
 };
 
