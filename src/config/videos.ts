@@ -5,13 +5,13 @@
  *
  * 字段说明：
  * - url: B 站视频链接（完整 URL）
- * - title: 视频标题
+ * - title: 视频标题（可选，优先使用 API 获取的标题）
  * - description: 视频描述（可选）
  */
 
 export interface Video {
   url: string
-  title: string
+  title?: string
   description?: string
 }
 
@@ -32,4 +32,12 @@ export const videos: Video[] = [
     url: 'https://www.bilibili.com/video/BV1SU411o7mu/',
     title: '【AI Peter】出生四人组的黄色潜水艇之旅《Yellow Submarine》',
   },
+  {
+    url: 'https://www.bilibili.com/video/BV1W4Vee8ESk/',
+    title: `【AI 牙叔】When I'm Sixty-Four 当牙64岁😢`,
+  },
+  {
+    url: 'https://www.bilibili.com/video/BV1s142127aA/',
+    title: '【AI 牙叔】我相信 ~ 皇后乐队团 我们相信你',
+  }
 ]
