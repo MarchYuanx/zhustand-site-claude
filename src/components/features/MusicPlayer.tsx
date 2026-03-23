@@ -17,7 +17,7 @@ import { useMusic } from '../../contexts/MusicContext'
  */
 function MusicPlayer() {
   const { currentMusic } = useMusic()
-  const audioRef = useRef(null)
+  const audioRef = useRef<HTMLAudioElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
@@ -52,7 +52,7 @@ function MusicPlayer() {
   }, [])
 
   // 播放/暂停切换
-  const togglePlay = (e) => {
+  const togglePlay = (e: React.MouseEvent) => {
     e.stopPropagation()
     if (isPlaying) {
       audioRef.current?.pause()
@@ -73,7 +73,7 @@ function MusicPlayer() {
   }
 
   // 拖动进度条
-  const handleProgressChange = (e) => {
+  const handleProgressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTime = parseFloat(e.target.value)
     if (audioRef.current) {
       audioRef.current.currentTime = newTime
@@ -82,7 +82,7 @@ function MusicPlayer() {
   }
 
   // 格式化时间显示（mm:ss）
-  const formatTime = (time) => {
+  const formatTime = (time: number): string => {
     if (isNaN(time)) return '0:00'
     const minutes = Math.floor(time / 60)
     const seconds = Math.floor(time % 60)

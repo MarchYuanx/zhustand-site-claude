@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { FiCopy, FiCheck } from 'react-icons/fi'
+import type { ImageData } from '../../utils/fileLoader'
 
 /**
  * 图片网格组件 - 美式网格布局
@@ -16,12 +17,17 @@ import { FiCopy, FiCheck } from 'react-icons/fi'
  *
  * 扩展点：预留分类筛选插槽
  */
-function ImageGrid({ images }) {
-  const [selectedImage, setSelectedImage] = useState(null)
-  const [copiedField, setCopiedField] = useState(null)
+
+interface ImageGridProps {
+  images: ImageData[]
+}
+
+function ImageGrid({ images }: ImageGridProps) {
+  const [selectedImage, setSelectedImage] = useState<ImageData | null>(null)
+  const [copiedField, setCopiedField] = useState<string | null>(null)
 
   // 复制到剪贴板
-  const copyToClipboard = async (text, fieldName) => {
+  const copyToClipboard = async (text: string, fieldName: string) => {
     try {
       await navigator.clipboard.writeText(text)
       setCopiedField(fieldName)
@@ -35,7 +41,7 @@ function ImageGrid({ images }) {
   useEffect(() => {
     if (selectedImage) {
       document.body.style.overflow = 'hidden'
-      const handleEsc = (e) => {
+      const handleEsc = (e: KeyboardEvent) => {
         if (e.key === 'Escape') setSelectedImage(null)
       }
       window.addEventListener('keydown', handleEsc)
@@ -49,7 +55,7 @@ function ImageGrid({ images }) {
   return (
     <>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {images.map((image, index) => (
+        {images.map((image: ImageData, index: number) => (
           <div
             key={index}
             className="group cursor-pointer overflow-hidden rounded-2xl bg-surface-elevated shadow-soft transition-all duration-300 hover:scale-105 hover:shadow-card"

@@ -61,7 +61,7 @@ function Header() {
   }
 
   // 创建单个星星元素
-  const createStar = (x: number, y: number, index: number) => {
+  const createStar = (x: number, y: number) => {
     const star = document.createElement('div')
     star.innerHTML = '★'
 
