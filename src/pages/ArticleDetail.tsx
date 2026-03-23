@@ -95,7 +95,7 @@ function ArticleDetail() {
   if (!article) {
     return (
       <div className="py-20 text-center">
-        <h1 className="mb-4 text-2xl font-bold text-text-primary">文章未找到</h1>
+        <h1 className="mb-4 text-2xl font-bold text-text-primary dark:text-gray-100">文章未找到</h1>
         <Link to="/articles" className="text-primary hover:underline">
           返回文章列表
         </Link>
@@ -112,13 +112,13 @@ function ArticleDetail() {
           <div className="sticky top-28">
             {/* 目录栏 */}
             {toc.length > 0 && (
-              <nav className="overflow-hidden rounded-2xl border border-border">
+              <nav className="overflow-hidden rounded-2xl border border-border dark:border-gray-700">
                 {/* 目录头部 - 可折叠 */}
                 <button
                   onClick={() => setIsTocCollapsed(!isTocCollapsed)}
-                  className="flex w-full items-center justify-between p-5 transition-colors hover:bg-surface-elevated/50"
+                  className="flex w-full items-center justify-between p-5 transition-colors hover:bg-surface-elevated/50 dark:hover:bg-gray-800/50"
                 >
-                  <h2 className="text-sm font-semibold uppercase tracking-wider text-text-tertiary">
+                  <h2 className="text-sm font-semibold uppercase tracking-wider text-text-tertiary dark:text-gray-500">
                     目录
                   </h2>
                   <svg
@@ -135,7 +135,7 @@ function ArticleDetail() {
 
                 {/* 目录内容 */}
                 {!isTocCollapsed && (
-                  <div className="max-h-[calc(100vh-240px)] overflow-y-auto border-t border-border px-5 pb-5">
+                  <div className="max-h-[calc(100vh-240px)] overflow-y-auto border-t border-border px-5 pb-5 dark:border-gray-700">
                     <ul className="space-y-1 pt-4">
                       {toc.map((item) => (
                         <li
@@ -144,10 +144,10 @@ function ArticleDetail() {
                         >
                           <button
                             onClick={() => handleTocClick(item.id)}
-                            className={`block w-full rounded-lg px-3 py-2 text-left text-sm leading-relaxed transition-all hover:bg-surface-elevated ${
+                            className={`block w-full rounded-lg px-3 py-2 text-left text-sm leading-relaxed transition-all hover:bg-surface-elevated dark:hover:bg-gray-800 ${
                               activeId === item.id
-                                ? 'font-semibold text-primary hover:bg-primary/5'
-                                : 'text-text-secondary hover:text-primary'
+                                ? 'font-semibold text-primary hover:bg-primary/5 dark:hover:bg-primary/10'
+                                : 'text-text-secondary hover:text-primary dark:text-gray-400'
                             }`}
                           >
                             {item.text}
@@ -167,7 +167,7 @@ function ArticleDetail() {
           {/* 移动端返回按钮 */}
           <Link
             to="/articles"
-            className="mb-8 inline-flex items-center rounded-2xl bg-surface-elevated px-6 py-4 text-text-secondary shadow-soft transition-all hover:scale-105 hover:text-primary hover:shadow-card lg:hidden"
+            className="mb-8 inline-flex items-center rounded-2xl bg-surface-elevated px-6 py-4 text-text-secondary shadow-soft transition-all hover:scale-105 hover:text-primary hover:shadow-card dark:bg-gray-800 dark:text-gray-300 lg:hidden"
           >
             <svg className="mr-3 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -176,9 +176,9 @@ function ArticleDetail() {
           </Link>
 
           {/* 文章头部 */}
-          <header className="mb-12 border-b border-border pb-10">
-            <h1 className="mb-6 text-4xl font-bold leading-tight text-text-primary lg:text-5xl">{article.title}</h1>
-            <div className="flex items-center gap-6 text-sm text-text-secondary">
+          <header className="mb-12 border-b border-border pb-10 dark:border-gray-700">
+            <h1 className="mb-6 text-4xl font-bold leading-tight text-text-primary lg:text-5xl dark:text-gray-100">{article.title}</h1>
+            <div className="flex items-center gap-6 text-sm text-text-secondary dark:text-gray-400">
               <span className="font-medium">{article.date}</span>
             </div>
           </header>
@@ -192,26 +192,26 @@ function ArticleDetail() {
               // 标题渲染 - 添加 id 用于目录跳转
               h1: ({ children, ...props }) => {
                 const id = children?.toString().toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-\u4e00-\u9fa5]/g, '')
-                return <h1 id={id} className="mb-6 mt-8 scroll-mt-24 font-serif text-3xl font-bold tracking-tight text-text-primary" {...props}>{children}</h1>
+                return <h1 id={id} className="mb-6 mt-8 scroll-mt-24 font-serif text-3xl font-bold tracking-tight text-text-primary dark:text-gray-100" {...props}>{children}</h1>
               },
               h2: ({ children, ...props }) => {
                 const id = children?.toString().toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-\u4e00-\u9fa5]/g, '')
-                return <h2 id={id} className="mb-4 mt-8 scroll-mt-24 font-serif text-2xl font-bold tracking-tight text-text-primary" {...props}>{children}</h2>
+                return <h2 id={id} className="mb-4 mt-8 scroll-mt-24 font-serif text-2xl font-bold tracking-tight text-text-primary dark:text-gray-100" {...props}>{children}</h2>
               },
               h3: ({ children, ...props }) => {
                 const id = children?.toString().toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-\u4e00-\u9fa5]/g, '')
-                return <h3 id={id} className="mb-3 mt-6 scroll-mt-24 font-serif text-xl font-semibold tracking-wide text-text-primary" {...props}>{children}</h3>
+                return <h3 id={id} className="mb-3 mt-6 scroll-mt-24 font-serif text-xl font-semibold tracking-wide text-text-primary dark:text-gray-100" {...props}>{children}</h3>
               },
               // 段落渲染
               p: (props) => (
-                <p className="mb-4 leading-relaxed text-text-secondary" {...props} />
+                <p className="mb-4 leading-relaxed text-text-secondary dark:text-gray-300" {...props} />
               ),
               // 列表渲染
               ul: (props) => (
-                <ul className="mb-4 ml-6 list-disc space-y-2 text-text-secondary" {...props} />
+                <ul className="mb-4 ml-6 list-disc space-y-2 text-text-secondary dark:text-gray-300" {...props} />
               ),
               ol: (props) => (
-                <ol className="mb-4 ml-6 list-decimal space-y-2 text-text-secondary" {...props} />
+                <ol className="mb-4 ml-6 list-decimal space-y-2 text-text-secondary dark:text-gray-300" {...props} />
               ),
               li: (props) => (
                 <li className="leading-relaxed" {...props} />
@@ -219,16 +219,16 @@ function ArticleDetail() {
               // 代码块渲染
               code: ({ inline, ...props }: any) =>
                 inline ? (
-                  <code className="rounded bg-surface-elevated px-1.5 py-0.5 font-mono text-sm text-primary" {...props} />
+                  <code className="rounded bg-surface-elevated px-1.5 py-0.5 font-mono text-sm text-primary dark:bg-gray-800 dark:text-blue-400" {...props} />
                 ) : (
-                  <code className="block rounded-xl bg-surface-elevated p-4 font-mono text-sm leading-relaxed" {...props} />
+                  <code className="block rounded-xl bg-surface-elevated p-4 font-mono text-sm leading-relaxed dark:bg-gray-800" {...props} />
                 ),
               pre: (props) => (
-                <pre className="mb-4 overflow-x-auto rounded-xl bg-surface-elevated p-4 shadow-soft" {...props} />
+                <pre className="mb-4 overflow-x-auto rounded-xl bg-surface-elevated p-4 shadow-soft dark:bg-gray-800" {...props} />
               ),
               // 引用块渲染
               blockquote: (props) => (
-                <blockquote className="mb-4 border-l-4 border-primary bg-surface-elevated pl-4 py-2 italic text-text-secondary" {...props} />
+                <blockquote className="mb-4 border-l-4 border-primary bg-surface-elevated pl-4 py-2 italic text-text-secondary dark:bg-gray-800 dark:text-gray-300" {...props} />
               ),
               // 表格渲染
               table: (props) => (
@@ -237,17 +237,17 @@ function ArticleDetail() {
                 </div>
               ),
               thead: (props) => (
-                <thead className="bg-surface-elevated" {...props} />
+                <thead className="bg-surface-elevated dark:bg-gray-800" {...props} />
               ),
               th: (props) => (
-                <th className="border border-border px-4 py-2 text-left font-semibold text-text-primary" {...props} />
+                <th className="border border-border px-4 py-2 text-left font-semibold text-text-primary dark:border-gray-700 dark:text-gray-100" {...props} />
               ),
               td: (props) => (
-                <td className="border border-border px-4 py-2 text-text-secondary" {...props} />
+                <td className="border border-border px-4 py-2 text-text-secondary dark:border-gray-700 dark:text-gray-300" {...props} />
               ),
               // 分割线渲染
               hr: (props) => (
-                <hr className="my-8 border-border" {...props} />
+                <hr className="my-8 border-border dark:border-gray-700" {...props} />
               ),
               // 图片渲染 - 响应式适配
               img: (props) => (
@@ -259,10 +259,10 @@ function ArticleDetail() {
               ),
               // 强调文本
               strong: (props) => (
-                <strong className="font-semibold text-text-primary" {...props} />
+                <strong className="font-semibold text-text-primary dark:text-gray-100" {...props} />
               ),
               em: (props) => (
-                <em className="italic text-text-secondary" {...props} />
+                <em className="italic text-text-secondary dark:text-gray-300" {...props} />
               ),
             }}
           >

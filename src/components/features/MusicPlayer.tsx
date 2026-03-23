@@ -109,11 +109,11 @@ function MusicPlayer() {
         {!isExpanded && (
           <button
             onClick={() => setIsExpanded(true)}
-            className="group flex h-14 w-14 items-center justify-center rounded-full border border-gray-200/80 bg-gradient-to-br from-white/98 via-gray-50/95 to-white/98 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-gray-300/80 hover:shadow-xl"
+            className="group flex h-14 w-14 items-center justify-center rounded-full border border-gray-200/80 bg-gradient-to-br from-white/98 via-gray-50/95 to-white/98 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-gray-300/80 hover:shadow-xl dark:border-gray-700/80 dark:from-gray-800/98 dark:via-gray-700/95 dark:to-gray-800/98 dark:hover:border-gray-600/80"
             aria-label="展开音乐播放器"
           >
             <FaMusic
-              className={`text-lg text-gray-900 ${
+              className={`text-lg text-gray-900 dark:text-gray-100 ${
                 isPlaying ? 'animate-bounce' : ''
               }`}
             />
@@ -123,13 +123,13 @@ function MusicPlayer() {
         {/* 展开状态 - 完整播放器 */}
         {isExpanded && (
           <div className="w-64 animate-in fade-in slide-in-from-bottom-2" style={{ animationDuration: `${ANIMATION_DURATION.NORMAL}ms` }}>
-            <div className="group relative overflow-hidden rounded-2xl border border-gray-200/80 bg-gradient-to-br from-white/98 via-gray-50/95 to-white/98 p-4 shadow-lg backdrop-blur-md transition-all duration-300 hover:border-gray-300/80 hover:shadow-xl">
+            <div className="group relative overflow-hidden rounded-2xl border border-gray-200/80 bg-gradient-to-br from-white/98 via-gray-50/95 to-white/98 p-4 shadow-lg backdrop-blur-md transition-all duration-300 hover:border-gray-300/80 hover:shadow-xl dark:border-gray-700/80 dark:from-gray-800/98 dark:via-gray-700/95 dark:to-gray-800/98 dark:hover:border-gray-600/80">
               {/* 歌曲信息和播放按钮 */}
               <div className="mb-3 flex items-start gap-3">
                 {/* 播放/暂停按钮 */}
                 <button
                   onClick={togglePlay}
-                  className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-gray-900 to-gray-800 text-white shadow-md transition-all duration-200 hover:scale-105 hover:shadow-lg"
+                  className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-gray-900 to-gray-800 text-white shadow-md transition-all duration-200 hover:scale-105 hover:shadow-lg dark:from-gray-100 dark:to-gray-200 dark:text-gray-900"
                   aria-label={isPlaying ? '暂停' : '播放'}
                 >
                   {isPlaying ? (
@@ -141,10 +141,10 @@ function MusicPlayer() {
 
                 {/* 歌曲名和歌手 */}
                 <div className="flex-1 overflow-hidden pt-0.5">
-                  <div className="truncate font-serif text-sm font-semibold leading-snug tracking-wide text-gray-900">
+                  <div className="truncate font-serif text-sm font-semibold leading-snug tracking-wide text-gray-900 dark:text-gray-100">
                     {songInfo.name}
                   </div>
-                  <div className="truncate font-sans text-xs leading-relaxed tracking-wide text-gray-500">
+                  <div className="truncate font-sans text-xs leading-relaxed tracking-wide text-gray-500 dark:text-gray-400">
                     {songInfo.artist}
                   </div>
                 </div>
@@ -152,7 +152,7 @@ function MusicPlayer() {
                 {/* 折叠按钮 */}
                 <button
                   onClick={() => setIsExpanded(false)}
-                  className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600"
+                  className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600 dark:text-gray-500 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                   aria-label="折叠"
                 >
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -164,10 +164,10 @@ function MusicPlayer() {
               {/* 进度条区域 */}
               <div className="space-y-2">
                 {/* 进度条容器 */}
-                <div className="group/progress relative h-1.5 w-full overflow-hidden rounded-full bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100">
+                <div className="group/progress relative h-1.5 w-full overflow-hidden rounded-full bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100 dark:from-gray-600 dark:via-gray-700 dark:to-gray-600">
                   {/* 进度填充 - 带渐变和动画 */}
                   <div
-                    className="absolute left-0 top-0 h-full rounded-full bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 shadow-sm transition-all duration-100"
+                    className="absolute left-0 top-0 h-full rounded-full bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 shadow-sm transition-all duration-100 dark:from-white dark:via-gray-50 dark:to-white"
                     style={{ width: `${progress}%` }}
                   />
                   {/* 可拖动的 input */}
@@ -182,7 +182,7 @@ function MusicPlayer() {
                 </div>
 
                 {/* 时间显示 */}
-                <div className="flex items-center justify-between font-mono text-xs tabular-nums tracking-wider text-gray-400">
+                <div className="flex items-center justify-between font-mono text-xs tabular-nums tracking-wider text-gray-400 dark:text-gray-500">
                   <span>{formatTime(currentTime)}</span>
                   <span>{formatTime(duration)}</span>
                 </div>

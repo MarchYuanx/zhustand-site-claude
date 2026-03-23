@@ -36,19 +36,19 @@ function VideoCard({ url, title }: VideoCardProps) {
   return (
     <Card className="overflow-hidden" hover={false}>
       {/* 视频标题 */}
-      <h3 className="mb-4 font-serif text-lg font-semibold tracking-wide text-text-primary">
+      <h3 className="mb-4 font-serif text-lg font-semibold tracking-wide text-text-primary dark:text-gray-100">
         {title || '视频'}
       </h3>
 
       {/* B 站 iframe 播放器 - 默认显示封面 */}
-      <div className="relative aspect-video overflow-hidden rounded-xl bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="relative aspect-video overflow-hidden rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700">
         {/* 骨架屏加载占位符 */}
         {isLoading && (
-          <div className="absolute inset-0 z-10 flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
+          <div className="absolute inset-0 z-10 flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700">
             <div className="flex flex-col items-center gap-4">
               {/* 加载动画 - 转圈效果 */}
-              <div className="h-12 w-12 animate-spin rounded-full border-4 border-gray-200 border-t-primary"></div>
-              <p className="font-sans text-sm font-medium tracking-wider text-text-secondary">Loading...</p>
+              <div className="h-12 w-12 animate-spin rounded-full border-4 border-gray-200 border-t-primary dark:border-gray-700"></div>
+              <p className="font-sans text-sm font-medium tracking-wider text-text-secondary dark:text-gray-400">Loading...</p>
             </div>
           </div>
         )}
@@ -65,7 +65,7 @@ function VideoCard({ url, title }: VideoCardProps) {
           />
         ) : (
           <div className="flex h-full items-center justify-center">
-            <p className="text-text-secondary">无效的视频链接</p>
+            <p className="text-text-secondary dark:text-gray-400">无效的视频链接</p>
           </div>
         )}
       </div>

@@ -42,11 +42,11 @@ function Gallery() {
     <div className="py-8">
       {/* 页面标题 - 艺术字体 */}
       <div className="mb-12 text-center">
-        <h1 className="mb-4 font-serif text-5xl font-bold tracking-tight text-text-primary">
+        <h1 className="mb-4 font-serif text-5xl font-bold tracking-tight text-text-primary dark:text-gray-100">
           Gallery
         </h1>
-        <p className="font-serif tracking-wide text-text-secondary">我的图片作品集</p>
-        <p className="mt-2 text-sm text-text-tertiary">Powered by Stable Diffusion</p>
+        <p className="font-serif tracking-wide text-text-secondary dark:text-gray-400">我的图片作品集</p>
+        <p className="mt-2 text-sm text-text-tertiary dark:text-gray-500">Powered by Stable Diffusion</p>
       </div>
 
       {/* 扩展点：分类筛选组件插槽 */}

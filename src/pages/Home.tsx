@@ -22,24 +22,24 @@ function Home() {
         {/* 姓名 - 视觉焦点 - 艺术字体 */}
         <h1 className="group relative mb-6 font-serif text-7xl font-bold tracking-tight md:text-8xl lg:text-9xl">
           {/* 渐变文字效果 */}
-          <span className="inline-block bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-transparent transition-transform duration-500 group-hover:-translate-x-2">
+          <span className="inline-block bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-transparent transition-transform duration-500 group-hover:-translate-x-2 dark:from-gray-100 dark:via-gray-300 dark:to-gray-100">
             Zhu
           </span>
-          <span className="inline-block bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-transparent transition-transform duration-500 group-hover:translate-x-2">
+          <span className="inline-block bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-transparent transition-transform duration-500 group-hover:translate-x-2 dark:from-gray-100 dark:via-gray-300 dark:to-gray-100">
             stand
           </span>
           {/* 微妙的文字阴影 - 保持静止 */}
-          <span className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-100/30 via-purple-100/20 to-pink-100/30 bg-clip-text text-transparent blur-2xl">
+          <span className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-100/30 via-purple-100/20 to-pink-100/30 bg-clip-text text-transparent blur-2xl dark:from-blue-900/30 dark:via-purple-900/20 dark:to-pink-900/30">
             Zhustand
           </span>
         </h1>
 
         {/* 职业描述 - 次级信息 - 优雅字体 */}
-        <p className="mb-12 font-serif text-xl tracking-widest text-text-secondary md:text-2xl">
+        <p className="mb-12 font-serif text-xl tracking-widest text-text-secondary md:text-2xl dark:text-gray-400">
           <span className="inline-block transition-all duration-300 hover:tracking-[0.3em]">
             frontend
           </span>
-          <span className="mx-3 text-gray-400">→</span>
+          <span className="mx-3 text-gray-400 dark:text-gray-500">→</span>
           <span className="inline-block transition-all duration-300 hover:tracking-[0.3em]">
             fullstack
           </span>
@@ -53,10 +53,10 @@ function Home() {
               return (
                 <div
                   key={tech.name}
-                  className="group flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-2.5 transition-all duration-200 hover:scale-105 hover:border-gray-300 hover:shadow-card"
+                  className="group flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-2.5 transition-all duration-200 hover:scale-105 hover:border-gray-300 hover:shadow-card dark:border-gray-700 dark:bg-gray-800 dark:hover:border-gray-600"
                 >
                   <Icon className={`h-4 w-4 ${tech.color} grayscale transition-all duration-300 group-hover:grayscale-0`} />
-                  <span className="text-sm font-medium text-text-secondary">{tech.name}</span>
+                  <span className="text-sm font-medium text-text-secondary dark:text-gray-300">{tech.name}</span>
                 </div>
               )
             })}

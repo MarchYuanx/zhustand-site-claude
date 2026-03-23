@@ -1,7 +1,8 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { HiMenu, HiX } from 'react-icons/hi'
+import { HiMenu, HiX, HiSun, HiMoon } from 'react-icons/hi'
 import { NAV_ITEMS, Z_INDEX, ANIMATION_DURATION, STAR_EFFECT } from '../../constants'
+import { useTheme } from '../../contexts/ThemeContext'
 
 /**
  * 顶部导航组件 - 美式极简风格
@@ -15,6 +16,7 @@ import { NAV_ITEMS, Z_INDEX, ANIMATION_DURATION, STAR_EFFECT } from '../../const
 function Header() {
   const location = useLocation()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { theme, toggleTheme } = useTheme()
 
   // 路由变化时关闭移动菜单
   useEffect(() => {
@@ -86,47 +88,78 @@ function Header() {
 
   return (
     <>
-      <header className="glass fixed left-0 right-0 top-0 border-b border-border/50" style={{ zIndex: Z_INDEX.HEADER }}>
+      <header className="glass fixed left-0 right-0 top-0 border-b border-border/50 dark:border-gray-700" style={{ zIndex: Z_INDEX.HEADER }}>
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           {/* Logo - 艺术字体 */}
           <Link
             to="/"
             onClick={handleLogoClick}
-            className="font-serif text-xl font-bold tracking-wide text-text-primary transition-all duration-200 hover:tracking-wider hover:text-primary"
+            className="font-serif text-xl font-bold tracking-wide text-text-primary transition-all duration-200 hover:tracking-wider hover:text-primary dark:text-gray-100"
           >
             Zhustand
           </Link>
 
           {/* 桌面端导航链接 */}
-          <ul className="hidden gap-8 md:flex">
-            {NAV_ITEMS.map((item) => (
-              <li key={item.path}>
-                <Link
-                  to={item.path}
-                  className={`font-serif text-sm font-medium tracking-wide transition-all duration-200 hover:tracking-wider hover:text-primary ${
-                    isActive(item.path)
-                      ? 'text-primary'
-                      : 'text-text-secondary'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <div className="hidden items-center gap-6 md:flex">
+            <ul className="flex gap-8">
+              {NAV_ITEMS.map((item) => (
+                <li key={item.path}>
+                  <Link
+                    to={item.path}
+                    className={`font-serif text-sm font-medium tracking-wide transition-all duration-200 hover:tracking-wider hover:text-primary ${
+                      isActive(item.path)
+                        ? 'text-primary'
+                        : 'text-text-secondary dark:text-gray-400'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
 
-          {/* 移动端汉堡菜单按钮 */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-text-primary transition-colors duration-200 hover:text-primary md:hidden"
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? (
-              <HiX className="h-6 w-6" />
-            ) : (
-              <HiMenu className="h-6 w-6" />
-            )}
-          </button>
+            {/* 主题切换按钮 */}
+            <button
+              onClick={toggleTheme}
+              className="rounded-lg p-2 text-text-secondary transition-all duration-200 hover:text-primary dark:text-gray-300 dark:hover:text-primary"
+              aria-label="Toggle theme"
+            >
+              {theme === 'light' ? (
+                <HiMoon className="h-5 w-5" />
+              ) : (
+                <HiSun className="h-5 w-5" />
+              )}
+            </button>
+          </div>
+
+          {/* 移动端按钮组 */}
+          <div className="flex items-center gap-3 md:hidden">
+            {/* 主题切换按钮 */}
+            <button
+              onClick={toggleTheme}
+              className="rounded-lg p-2 text-text-secondary transition-all duration-200 hover:scale-110 hover:text-primary dark:text-gray-300 dark:hover:text-primary"
+              aria-label="Toggle theme"
+            >
+              {theme === 'light' ? (
+                <HiMoon className="h-5 w-5" />
+              ) : (
+                <HiSun className="h-5 w-5" />
+              )}
+            </button>
+
+            {/* 汉堡菜单按钮 */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-text-primary transition-colors duration-200 hover:text-primary dark:text-gray-100"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? (
+                <HiX className="h-6 w-6" />
+              ) : (
+                <HiMenu className="h-6 w-6" />
+              )}
+            </button>
+          </div>
         </nav>
       </header>
 
@@ -147,18 +180,18 @@ function Header() {
 
         {/* 侧边栏内容 */}
         <div
-          className={`absolute right-0 top-0 h-full w-64 bg-white shadow-modal transition-transform duration-300 ${
+          className={`absolute right-0 top-0 h-full w-64 bg-white shadow-modal transition-transform duration-300 dark:bg-gray-800 ${
             isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
           {/* 关闭按钮 */}
-          <div className="flex items-center justify-between border-b border-border/50 px-6 py-4">
-            <span className="font-serif text-lg font-bold text-text-primary">
+          <div className="flex items-center justify-between border-b border-border/50 px-6 py-4 dark:border-gray-700">
+            <span className="font-serif text-lg font-bold text-text-primary dark:text-gray-100">
               Menu
             </span>
             <button
               onClick={() => setIsMobileMenuOpen(false)}
-              className="text-text-secondary transition-colors duration-200 hover:text-primary"
+              className="text-text-secondary transition-colors duration-200 hover:text-primary dark:text-gray-400"
               aria-label="Close menu"
             >
               <HiX className="h-6 w-6" />
@@ -174,7 +207,7 @@ function Header() {
                   className={`block rounded-xl px-4 py-3 font-serif text-base font-medium tracking-wide transition-all duration-200 ${
                     isActive(item.path)
                       ? 'bg-primary/10 text-primary'
-                      : 'text-text-secondary hover:bg-surface-secondary hover:text-primary'
+                      : 'text-text-secondary hover:bg-gray-100 hover:text-primary dark:text-gray-400 dark:hover:bg-gray-700'
                   }`}
                 >
                   {item.label}

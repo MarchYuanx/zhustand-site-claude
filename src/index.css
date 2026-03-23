@@ -21,29 +21,38 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* 暗色主题 */
+  .dark body {
+    @apply bg-gray-900 text-gray-100;
+  }
+
   /* 自定义滚动条样式 - 美式极简风格 */
   ::-webkit-scrollbar {
     width: 12px;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-gray-100;
+    @apply bg-gray-100 dark:bg-gray-800;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 rounded-full;
+    @apply bg-gray-300 dark:bg-gray-600 rounded-full;
     border: 3px solid transparent;
     background-clip: content-box;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-400;
+    @apply bg-gray-400 dark:bg-gray-500;
   }
 
   /* Firefox 滚动条样式 */
   * {
     scrollbar-width: thin;
     scrollbar-color: rgb(209 213 219) rgb(243 244 246);
+  }
+
+  .dark * {
+    scrollbar-color: rgb(75 85 99) rgb(31 41 55);
   }
 }
 
@@ -58,9 +67,17 @@
     @apply rounded-xl border border-border bg-surface-elevated px-6 py-3 font-medium text-text-primary transition-all duration-200 hover:scale-105 hover:shadow-soft active:scale-95;
   }
 
+  .dark .btn-secondary {
+    @apply border-gray-700 bg-gray-800 text-gray-100;
+  }
+
   /* 通用卡片样式 */
   .card {
     @apply rounded-2xl bg-surface-base p-6 shadow-card transition-all duration-300 hover:shadow-modal;
+  }
+
+  .dark .card {
+    @apply bg-gray-800 shadow-gray-900/50;
   }
 
   /* 链接悬停效果 */
@@ -79,6 +96,10 @@
   /* 玻璃态效果 */
   .glass {
     @apply bg-white/80 backdrop-blur-md;
+  }
+
+  .dark .glass {
+    @apply bg-gray-900/80;
   }
 
   /* 星星爆炸动画 */

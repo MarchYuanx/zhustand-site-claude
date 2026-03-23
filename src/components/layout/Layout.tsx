@@ -21,7 +21,7 @@ function Layout({ children }: LayoutProps) {
   const { showPlayer } = useMusic()
 
   return (
-    <div className="min-h-screen bg-surface-base">
+    <div className="min-h-screen bg-surface-base dark:bg-gray-900">
       <Header />
 
       {/* 主内容区 - 顶部留出 Header 高度 */}

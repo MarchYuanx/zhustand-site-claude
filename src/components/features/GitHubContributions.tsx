@@ -19,18 +19,18 @@ function GitHubContributions({ username }: GitHubContributionsProps) {
   return (
     <div className="w-full">
       {/* 标题 - 优雅字体 */}
-      <h2 className="mb-6 text-center font-serif text-2xl font-semibold tracking-wide text-text-primary">
+      <h2 className="mb-6 text-center font-serif text-2xl font-semibold tracking-wide text-text-primary dark:text-gray-100">
         GitHub Contributions
       </h2>
 
       {/* 贡献图表卡片 */}
-      <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 shadow-card transition-all duration-200 hover:shadow-soft">
+      <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 shadow-card transition-all duration-200 hover:shadow-soft dark:border-gray-700 dark:bg-gray-800">
         {/* Loading 骨架屏 */}
         {isLoading && (
-          <div className="absolute inset-0 flex items-center justify-center bg-white">
+          <div className="absolute inset-0 flex items-center justify-center bg-white dark:bg-gray-800">
             <div className="flex flex-col items-center gap-3">
-              <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-200 border-t-primary"></div>
-              <p className="text-sm text-text-tertiary">Loading contributions...</p>
+              <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-200 border-t-primary dark:border-gray-700"></div>
+              <p className="text-sm text-text-tertiary dark:text-gray-500">Loading contributions...</p>
             </div>
           </div>
         )}
@@ -53,7 +53,7 @@ function GitHubContributions({ username }: GitHubContributionsProps) {
           target="_blank"
           rel="noopener noreferrer"
 
-          className="inline-flex items-center gap-1 text-sm text-text-tertiary transition-colors duration-200 hover:text-primary"
+          className="inline-flex items-center gap-1 text-sm text-text-tertiary transition-colors duration-200 hover:text-primary dark:text-gray-500 dark:hover:text-primary"
         >
           <span>View Full Profile</span>
           <span>→</span>

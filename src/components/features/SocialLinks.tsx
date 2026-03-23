@@ -23,7 +23,7 @@ function SocialLinks() {
             href={link.url}
             target={isEmail ? undefined : "_blank"}
             rel={isEmail ? undefined : "noopener noreferrer"}
-            className={`text-text-secondary transition-all duration-200 hover:scale-110 ${link.color}`}
+            className={`text-text-secondary transition-all duration-200 hover:scale-110 dark:text-gray-400 dark:hover:text-white ${link.color}`}
             aria-label={link.name}
             onClick={isEmail ? (e) => {
               e.preventDefault()

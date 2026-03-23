@@ -37,11 +37,11 @@ function Articles() {
     <div className="py-8">
       {/* 页面标题 - 艺术字体 */}
       <div className="mb-12 text-center">
-        <h1 className="mb-4 font-serif text-5xl font-bold tracking-tight text-text-primary">
+        <h1 className="mb-4 font-serif text-5xl font-bold tracking-tight text-text-primary dark:text-gray-100">
           Articles
         </h1>
-        <p className="font-serif tracking-wide text-text-secondary">我的文章作品集</p>
-        <p className="mt-2 text-sm text-text-tertiary">Powered by Claude Code</p>
+        <p className="font-serif tracking-wide text-text-secondary dark:text-gray-400">我的文章作品集</p>
+        <p className="mt-2 text-sm text-text-tertiary dark:text-gray-500">Powered by Claude Code</p>
       </div>
 
       {/* 扩展点：搜索/筛选组件插槽 */}
@@ -53,15 +53,15 @@ function Articles() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           {articles.map((article) => (
             <Link key={article.id} to={`/articles/${article.id}`}>
-              <Card className="h-full transition-all hover:border-primary">
-                <h2 className="mb-2 font-serif text-2xl font-bold tracking-tight text-text-primary">
+              <Card className="h-full transition-all hover:border-primary dark:hover:border-primary">
+                <h2 className="mb-2 font-serif text-2xl font-bold tracking-tight text-text-primary dark:text-gray-100">
                   {article.title}
                 </h2>
-                <p className="mb-4 line-clamp-2 text-text-secondary">
+                <p className="mb-4 line-clamp-2 text-text-secondary dark:text-gray-400">
                   {article.content.substring(0, 150)}...
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-sm tabular-nums text-text-tertiary">
+                  <span className="font-mono text-sm tabular-nums text-text-tertiary dark:text-gray-500">
                     {article.date}
                   </span>
                   <span className="font-serif text-sm font-medium tracking-wide text-primary">
@@ -74,8 +74,8 @@ function Articles() {
         </div>
       ) : (
         <div className="py-20 text-center">
-          <p className="text-text-secondary">暂无文章</p>
-          <p className="mt-2 text-sm text-text-tertiary">
+          <p className="text-text-secondary dark:text-gray-400">暂无文章</p>
+          <p className="mt-2 text-sm text-text-tertiary dark:text-gray-500">
             请将 Markdown 文件放入 public/assets/articles 目录
           </p>
         </div>
