@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 
 /**
  * 音乐设置 Context
@@ -9,8 +9,27 @@ import { createContext, useContext, useState, useEffect } from 'react'
  * - 持久化设置到 localStorage
  */
 
+// 音乐类型定义
+export interface Music {
+  id: number
+  name: string
+  artist: string
+  url: string
+  isDefault?: boolean
+}
+
+// Context 类型定义
+interface MusicContextType {
+  showPlayer: boolean
+  setShowPlayer: (show: boolean) => void
+  selectedMusicId: number
+  setSelectedMusicId: (id: number) => void
+  currentMusic: Music
+  musicList: Music[]
+}
+
 // 音乐列表配置
-export const MUSIC_LIST = [
+export const MUSIC_LIST: Music[] = [
   {
     id: 26116122,
     name: 'Stay Gold',
@@ -35,9 +54,9 @@ export const MUSIC_LIST = [
 // 默认歌曲 ID
 export const DEFAULT_MUSIC_ID = MUSIC_LIST.find(music => music.isDefault)?.id || MUSIC_LIST[0].id
 
-const MusicContext = createContext()
+const MusicContext = createContext<MusicContextType | undefined>(undefined)
 
-export function MusicProvider({ children }) {
+export function MusicProvider({ children }: { children: ReactNode }) {
   // 从 localStorage 读取设置，默认显示播放器，选择第一首歌
   const [showPlayer, setShowPlayer] = useState(() => {
     const saved = localStorage.getItem('musicSettings')
