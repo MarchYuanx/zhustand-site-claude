@@ -14,9 +14,9 @@ export interface NavItem {
 
 export const NAV_ITEMS: NavItem[] = [
   { path: ROUTES.HOME, label: 'Home' },
+  { path: ROUTES.ABOUT, label: 'About' },
   { path: ROUTES.GALLERY, label: 'Gallery' },
   { path: ROUTES.VIDEOS, label: 'Videos' },
   { path: ROUTES.ARTICLES, label: 'Articles' },
-  { path: ROUTES.ABOUT, label: 'About' },
   { path: ROUTES.SETTINGS, label: 'Settings' },
 ]
