@@ -14,10 +14,12 @@ function Settings() {
 
   return (
     <div className="min-h-[calc(100vh-12rem)] py-8">
-      {/* 页面标题 */}
+      {/* 页面标题 - 艺术字体 */}
       <div className="mb-12 text-center">
-        <h1 className="mb-3 text-4xl font-bold text-text-primary">设置</h1>
-        <p className="text-text-secondary">自定义你的音乐播放体验</p>
+        <h1 className="mb-4 font-serif text-5xl font-bold tracking-tight text-text-primary">
+          Settings
+        </h1>
+        <p className="font-serif tracking-wide text-text-secondary">自定义你的音乐播放体验</p>
       </div>
 
       {/* 设置卡片容器 */}

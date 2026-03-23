@@ -24,7 +24,7 @@ function About() {
         {/* 简介文字 - 优雅字体 */}
         <div className="mb-16 space-y-4 text-center">
           <p className="font-serif text-3xl tracking-wide text-text-secondary">
-            Hi, I&apos;m Zustand 😄
+            Hi, I&apos;m Zhustand 😄
           </p>
           <p className="mx-auto max-w-2xl text-lg leading-relaxed text-text-tertiary">
             曾用名 March Yuanx
