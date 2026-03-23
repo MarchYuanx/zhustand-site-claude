@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Card from '../components/common/Card'
 import Loading from '../components/common/Loading'
-import { loadArticles, ArticleData } from '../utils/fileLoader'
+import { loadArticles } from '../utils/fileLoader'
+import type { ArticleData } from '../utils/fileLoader'
 
 /**
  * 文章列表页

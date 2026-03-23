@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import ImageGrid from '../components/features/ImageGrid'
 import Loading from '../components/common/Loading'
-import { loadImages, ImageData } from '../utils/fileLoader'
+import { loadImages } from '../utils/fileLoader'
+import type { ImageData } from '../utils/fileLoader'
 import { getImageMetadata } from '../data/imageMetadata'
 
 /**

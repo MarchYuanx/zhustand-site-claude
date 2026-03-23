@@ -177,6 +177,25 @@ function processData<T>(data: T) {
 - 复杂类型抽取到 `types/` 目录统一管理
 - 使用 `readonly` 标记不可变数据
 - 优先使用联合类型而非枚举（更轻量）
+- **导入类型时必须使用 `import type` 语法**（提高 tree-shaking 效果，避免循环依赖）
+
+**类型导入规范：**
+
+```typescript
+// ✅ 推荐：使用 import type 导入类型
+import type { ArticleData } from '../utils/fileLoader'
+import type { Music } from '../contexts/MusicContext'
+
+// ❌ 避免：直接导入类型（会被当作值导入）
+import { ArticleData } from '../utils/fileLoader'
+
+// ✅ 推荐：混合导入时分开写
+import { loadArticles } from '../utils/fileLoader'
+import type { ArticleData } from '../utils/fileLoader'
+
+// ✅ 推荐：或使用 inline type 导入
+import { loadArticles, type ArticleData } from '../utils/fileLoader'
+```
 
 **迁移策略：**
 
