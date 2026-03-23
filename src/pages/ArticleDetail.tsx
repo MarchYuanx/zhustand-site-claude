@@ -5,6 +5,7 @@ import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
 import Loading from '../components/common/Loading'
 import { loadArticles } from '../utils/fileLoader'
+import type { ArticleData } from '../utils/fileLoader'
 import 'highlight.js/styles/github.css'
 
 /**
@@ -21,20 +22,27 @@ import 'highlight.js/styles/github.css'
  * - 预留评论功能
  * - 预留点赞功能
  */
+
+interface TocItem {
+  id: string
+  text: string
+  level: number
+}
+
 function ArticleDetail() {
   const { id } = useParams()
-  const [article, setArticle] = useState(null)
+  const [article, setArticle] = useState<ArticleData | null>(null)
   const [loading, setLoading] = useState(true)
-  const [toc, setToc] = useState([])
+  const [toc, setToc] = useState<TocItem[]>([])
   const [activeId, setActiveId] = useState('')
   const [isTocCollapsed, setIsTocCollapsed] = useState(false)
-  const contentRef = useRef(null)
+  const contentRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     async function fetchArticle() {
       const articles = await loadArticles()
       const found = articles.find((a) => a.id === id)
-      setArticle(found)
+      setArticle(found || null)
       setLoading(false)
     }
     fetchArticle()
@@ -47,7 +55,7 @@ function ArticleDetail() {
     const headings = contentRef.current.querySelectorAll('h1, h2, h3')
     const tocData = Array.from(headings).map((heading) => ({
       id: heading.id,
-      text: heading.textContent,
+      text: heading.textContent || '',
       level: parseInt(heading.tagName.charAt(1)),
     }))
     setToc(tocData)
@@ -75,7 +83,7 @@ function ArticleDetail() {
   }, [article])
 
   // 点击目录跳转
-  const handleTocClick = (id) => {
+  const handleTocClick = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' })
