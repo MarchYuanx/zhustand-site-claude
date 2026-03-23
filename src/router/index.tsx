@@ -11,6 +11,7 @@ const Articles = lazy(() => import('../pages/Articles'))
 const ArticleDetail = lazy(() => import('../pages/ArticleDetail'))
 const About = lazy(() => import('../pages/About'))
 const Settings = lazy(() => import('../pages/Settings'))
+const NotFound = lazy(() => import('../pages/NotFound'))
 
 /**
  * 路由配置 - 采用懒加载 + 模块化设计
@@ -33,6 +34,9 @@ function AppRouter() {
         <Route path={ROUTES.SETTINGS} element={<Settings />} />
 
         {/* 扩展点：在此添加新路由 */}
+
+        {/* 404 页面 - 通配符路由，必须放在最后 */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
   )
