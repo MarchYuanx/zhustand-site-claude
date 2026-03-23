@@ -15,7 +15,10 @@
       "Bash(pnpm tsc:*)",
       "Bash(git mv:*)",
       "Bash(pnpm build:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(mkdir -p src/assets/images src/assets/articles)",
+      "Bash(mv public/assets/images/* src/assets/images/)",
+      "Bash(mv public/assets/articles/* src/assets/articles/)"
     ]
   }
 }

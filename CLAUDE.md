@@ -93,11 +93,11 @@ src/
 
 ### 添加图片作品
 
-将图片文件（png/jpg/webp/svg）放入 `public/assets/images/` 目录，Gallery 页面会自动扫描并展示。
+将图片文件（png/jpg/webp/svg）放入 `src/assets/images/` 目录，Gallery 页面会自动扫描并展示。
 
 ### 添加文章
 
-将 Markdown 文件放入 `public/assets/articles/` 目录，Articles 页面会自动扫描并展示。文章格式：
+将 Markdown 文件放入 `src/assets/articles/` 目录，Articles 页面会自动扫描并展示。文章格式：
 
 ```markdown
 # 文章标题

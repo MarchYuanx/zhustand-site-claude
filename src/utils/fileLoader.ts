@@ -1,5 +1,5 @@
 /**
- * 文件加载工具 - 自动读取 public/assets 目录
+ * 文件加载工具 - 自动读取 src/assets 目录
  *
  * 功能：
  * 1. loadImages() - 加载所有图片
@@ -30,8 +30,8 @@ export interface ArticleData {
  */
 export async function loadImages(): Promise<ImageData[]> {
   try {
-    // Vite 动态导入 - 自动扫描 public/assets/images 目录
-    const imageModules = import.meta.glob('/public/assets/images/*.(png|jpg|jpeg|webp|svg)', {
+    // Vite 动态导入 - 自动扫描 src/assets/images 目录
+    const imageModules = import.meta.glob('@/assets/images/*.(png|jpg|jpeg|webp|svg)', {
       eager: true,
       as: 'url',
     })
@@ -55,7 +55,7 @@ export async function loadImages(): Promise<ImageData[]> {
  */
 export async function loadArticles(): Promise<ArticleData[]> {
   try {
-    const articleModules = import.meta.glob('/public/assets/articles/*.md', {
+    const articleModules = import.meta.glob('@/assets/articles/*.md', {
       as: 'raw',
     })
 
