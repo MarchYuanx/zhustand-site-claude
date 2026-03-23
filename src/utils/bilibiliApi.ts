@@ -87,3 +87,54 @@ export function formatDuration(seconds: number): string {
   }
   return `${minutes}:${secs.toString().padStart(2, '0')}`
 }
+
+/**
+ * B 站用户信息接口
+ */
+export interface BilibiliUserInfo {
+  mid: number
+  name: string
+  face: string
+  sign: string
+  level: number
+  follower: number
+  following: number
+}
+
+/**
+ * 从 B 站 API 获取用户信息
+ * @param mid - 用户 ID
+ * @returns 用户信息对象
+ */
+export async function getBilibiliUserInfo(mid: number): Promise<BilibiliUserInfo | null> {
+  try {
+    // 开发环境使用代理，生产环境直接调用
+    const apiUrl = import.meta.env.DEV
+      ? `/api/bilibili/x/space/acc/info?mid=${mid}`
+      : `https://api.bilibili.com/x/space/acc/info?mid=${mid}`
+
+    const response = await fetch(apiUrl, {
+      headers: {
+        'Referer': 'https://www.bilibili.com',
+      }
+    })
+    const data = await response.json()
+
+    if (data.code === 0 && data.data) {
+      return {
+        mid: data.data.mid,
+        name: data.data.name,
+        face: data.data.face,
+        sign: data.data.sign,
+        level: data.data.level,
+        follower: data.data.follower || 0,
+        following: data.data.following || 0,
+      }
+    }
+
+    return null
+  } catch (error) {
+    console.error('获取 B 站用户信息失败:', error)
+    return null
+  }
+}
