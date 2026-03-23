@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { HiMenu, HiX } from 'react-icons/hi'
+import { NAV_ITEMS, Z_INDEX, ANIMATION_DURATION, STAR_EFFECT } from '../../constants'
 
 /**
  * 顶部导航组件 - 美式极简风格
@@ -14,15 +15,6 @@ import { HiMenu, HiX } from 'react-icons/hi'
 function Header() {
   const location = useLocation()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-
-  const navItems = [
-    { path: '/', label: 'Home' },
-    { path: '/gallery', label: 'Gallery' },
-    { path: '/videos', label: 'Videos' },
-    { path: '/articles', label: 'Articles' },
-    { path: '/about', label: 'About' },
-    { path: '/settings', label: 'Settings' },
-  ]
 
   // 路由变化时关闭移动菜单
   useEffect(() => {
@@ -54,8 +46,8 @@ function Header() {
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
 
-    // 创建 8 个星星
-    for (let i = 0; i < 8; i++) {
+    // 创建星星
+    for (let i = 0; i < STAR_EFFECT.COUNT; i++) {
       createStar(rect.left + x, rect.top + y)
     }
   }
@@ -65,9 +57,8 @@ function Header() {
     const star = document.createElement('div')
     star.innerHTML = '★'
 
-    // 随机选择蓝色或黑色
-    const colors = ['#007AFF', '#1a1a1a']
-    const color = colors[Math.floor(Math.random() * colors.length)]
+    // 随机选择颜色
+    const color = STAR_EFFECT.COLORS[Math.floor(Math.random() * STAR_EFFECT.COLORS.length)]
 
     star.style.cssText = `
       position: fixed;
@@ -76,26 +67,26 @@ function Header() {
       color: ${color};
       font-size: 12px;
       pointer-events: none;
-      z-index: 9999;
-      animation: starBurst 0.6s ease-out forwards;
+      z-index: ${Z_INDEX.STAR_EFFECT};
+      animation: starBurst ${ANIMATION_DURATION.STAR_BURST}ms ease-out forwards;
       transform-origin: center;
     `
 
     // 向上扩散，左右随机偏移
-    const horizontalOffset = (Math.random() - 0.5) * 60
-    const verticalDistance = -40 - Math.random() * 20
+    const horizontalOffset = (Math.random() - 0.5) * STAR_EFFECT.HORIZONTAL_OFFSET_MAX
+    const verticalDistance = -STAR_EFFECT.VERTICAL_DISTANCE_MIN - Math.random() * STAR_EFFECT.VERTICAL_DISTANCE_RANDOM
     star.style.setProperty('--tx', `${horizontalOffset}px`)
     star.style.setProperty('--ty', `${verticalDistance}px`)
 
     document.body.appendChild(star)
 
     // 动画结束后移除元素
-    setTimeout(() => star.remove(), 600)
+    setTimeout(() => star.remove(), ANIMATION_DURATION.STAR_BURST)
   }
 
   return (
     <>
-      <header className="glass fixed left-0 right-0 top-0 z-50 border-b border-border/50">
+      <header className="glass fixed left-0 right-0 top-0 border-b border-border/50" style={{ zIndex: Z_INDEX.HEADER }}>
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           {/* Logo - 艺术字体 */}
           <Link
@@ -108,7 +99,7 @@ function Header() {
 
           {/* 桌面端导航链接 */}
           <ul className="hidden gap-8 md:flex">
-            {navItems.map((item) => (
+            {NAV_ITEMS.map((item) => (
               <li key={item.path}>
                 <Link
                   to={item.path}
@@ -141,11 +132,12 @@ function Header() {
 
       {/* 移动端侧边栏菜单 */}
       <div
-        className={`fixed inset-0 z-[60] transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 transition-opacity md:hidden ${
           isMobileMenuOpen
             ? 'pointer-events-auto opacity-100'
             : 'pointer-events-none opacity-0'
         }`}
+        style={{ zIndex: Z_INDEX.MOBILE_MENU_OVERLAY, transitionDuration: `${ANIMATION_DURATION.NORMAL}ms` }}
       >
         {/* 背景遮罩 */}
         <div
@@ -175,7 +167,7 @@ function Header() {
 
           {/* 导航链接 */}
           <ul className="flex flex-col px-6 py-4">
-            {navItems.map((item) => (
+            {NAV_ITEMS.map((item) => (
               <li key={item.path}>
                 <Link
                   to={item.path}

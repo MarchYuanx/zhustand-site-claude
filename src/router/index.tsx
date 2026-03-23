@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Loading from '../components/common/Loading'
+import { ROUTES } from '../constants'
 
 // 懒加载页面组件 - 提升首屏加载性能
 const Home = lazy(() => import('../pages/Home'))
@@ -23,13 +24,13 @@ function AppRouter() {
   return (
     <Suspense fallback={<Loading />}>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/videos" element={<Videos />} />
-        <Route path="/articles" element={<Articles />} />
-        <Route path="/articles/:id" element={<ArticleDetail />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route path={ROUTES.HOME} element={<Home />} />
+        <Route path={ROUTES.GALLERY} element={<Gallery />} />
+        <Route path={ROUTES.VIDEOS} element={<Videos />} />
+        <Route path={ROUTES.ARTICLES} element={<Articles />} />
+        <Route path={ROUTES.ARTICLE_DETAIL} element={<ArticleDetail />} />
+        <Route path={ROUTES.ABOUT} element={<About />} />
+        <Route path={ROUTES.SETTINGS} element={<Settings />} />
 
         {/* 扩展点：在此添加新路由 */}
       </Routes>

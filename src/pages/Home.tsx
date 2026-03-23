@@ -1,6 +1,5 @@
 import SocialLinks from '../components/features/SocialLinks'
-import { FaReact } from 'react-icons/fa'
-import { SiTypescript, SiVercel, SiVite, SiTailwindcss, SiClaude } from 'react-icons/si'
+import { TECH_STACK } from '../constants'
 
 /**
  * 首页 Hero 模块 - 美式极简风格
@@ -16,15 +15,6 @@ import { SiTypescript, SiVercel, SiVite, SiTailwindcss, SiClaude } from 'react-i
  * - 社交链接（GitHub/小红书/B站/邮箱）
  */
 function Home() {
-  const techStack = [
-    { name: 'React', icon: FaReact, color: 'text-[#61DAFB]' },
-    { name: 'TypeScript', icon: SiTypescript, color: 'text-[#3178C6]' },
-    { name: 'Vite', icon: SiVite, color: 'text-[#646CFF]' },
-    { name: 'Tailwind CSS', icon: SiTailwindcss, color: 'text-[#06B6D4]' },
-    { name: 'Vercel', icon: SiVercel, color: 'text-gray-900' },
-    { name: 'Claude Code', icon: SiClaude, color: 'text-[#D97757]' },
-  ]
-
   return (
     <div className="flex min-h-[80vh] flex-col items-center justify-center">
       {/* Hero 内容区 */}
@@ -58,7 +48,7 @@ function Home() {
         {/* 技术栈展示 */}
         <div className="mb-12">
           <div className="flex flex-wrap justify-center gap-3">
-            {techStack.map((tech) => {
+            {TECH_STACK.map((tech) => {
               const Icon = tech.icon
               return (
                 <div

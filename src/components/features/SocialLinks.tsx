@@ -1,5 +1,4 @@
-import { FaGithub, FaEnvelope } from 'react-icons/fa'
-import { SiBilibili, SiXiaohongshu } from 'react-icons/si'
+import { SOCIAL_LINKS } from '../../constants'
 
 /**
  * 社交链接组件 - 美式极简风格
@@ -12,36 +11,9 @@ import { SiBilibili, SiXiaohongshu } from 'react-icons/si'
  * 扩展点：可通过 props 传入自定义链接列表
  */
 function SocialLinks() {
-  const links = [
-    {
-      name: 'GitHub',
-      url: 'https://github.com/MarchYuanx',
-      icon: FaGithub,
-      color: 'hover:text-gray-900',
-    },
-    {
-      name: '小红书',
-      url: 'https://www.xiaohongshu.com/user/profile/60cf61900000000001000cd5',
-      icon: SiXiaohongshu,
-      color: 'hover:text-red-500',
-    },
-    {
-      name: 'B站',
-      url: 'https://space.bilibili.com/17178880',
-      icon: SiBilibili,
-      color: 'hover:text-[#00A1D6]',
-    },
-    {
-      name: 'Email',
-      url: 'mailto:marchyuanx@foxmail.com',
-      icon: FaEnvelope,
-      color: 'hover:text-blue-500',
-    },
-  ]
-
   return (
     <div className="flex gap-6">
-      {links.map((link) => {
+      {SOCIAL_LINKS.map((link) => {
         const Icon = link.icon
         const isEmail = link.url.startsWith('mailto:')
 

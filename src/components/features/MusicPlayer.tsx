@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { FaPlay, FaPause, FaMusic } from 'react-icons/fa'
 import { useMusic } from '../../contexts/MusicContext'
+import { Z_INDEX, ANIMATION_DURATION } from '../../constants'
 
 /**
  * 背景音乐播放器 - Claude 风格 + 可折叠
@@ -103,7 +104,7 @@ function MusicPlayer() {
         onEnded={() => setIsPlaying(false)}
       />
 
-      <div className="fixed bottom-6 right-6 z-40">
+      <div className="fixed bottom-6 right-6" style={{ zIndex: Z_INDEX.MUSIC_PLAYER }}>
         {/* 折叠状态 - 小球 */}
         {!isExpanded && (
           <button
@@ -121,7 +122,7 @@ function MusicPlayer() {
 
         {/* 展开状态 - 完整播放器 */}
         {isExpanded && (
-          <div className="w-64 animate-in fade-in slide-in-from-bottom-2 duration-300">
+          <div className="w-64 animate-in fade-in slide-in-from-bottom-2" style={{ animationDuration: `${ANIMATION_DURATION.NORMAL}ms` }}>
             <div className="group relative overflow-hidden rounded-2xl border border-gray-200/80 bg-gradient-to-br from-white/98 via-gray-50/95 to-white/98 p-4 shadow-lg backdrop-blur-md transition-all duration-300 hover:border-gray-300/80 hover:shadow-xl">
               {/* 歌曲信息和播放按钮 */}
               <div className="mb-3 flex items-start gap-3">
