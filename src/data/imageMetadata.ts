@@ -82,6 +82,6 @@ long hair,mature female,jellyfish,disdain,<lora:Cantarella:1>,blue eyes,solo,jew
  * @param {string} filename - 图片文件名
  * @returns {object} 图片元数据对象
  */
-export function getImageMetadata(filename) {
-  return imageMetadata[filename] || {}
+export function getImageMetadata(filename: string) {
+  return imageMetadata[filename as keyof typeof imageMetadata] || {}
 }
