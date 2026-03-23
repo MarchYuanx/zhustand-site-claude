@@ -77,7 +77,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 🎨 Tailwind CSS 3.x 原子化样式
 - 🔄 React Router 6.x 路由管理
 - 📝 react-markdown + rehype-highlight 代码高亮
-- 🎬 react-player 视频播放支持
 - 🎨 react-icons 图标库集成
 
 ---

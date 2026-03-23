@@ -9,7 +9,6 @@
 - Tailwind CSS 3.x
 - react-router-dom 6.x
 - react-markdown
-- react-player
 
 ## 快速开始
 

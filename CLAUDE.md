@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-这是一个基于 React 18 + Tailwind CSS 的个人作品集网站，采用美式 App 极简美学设计（iOS/macOS 风格）。
+这是一个基于 React 18 + TypeScript + Tailwind CSS 的个人作品集网站，采用美式 App 极简美学设计（iOS/macOS 风格）。
 
 **技术栈：**
 - React 18.2+ (Vite 构建)
@@ -12,7 +12,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Tailwind CSS 3.x (原子化样式)
 - react-icons (图标库)
 - react-markdown (Markdown 渲染)
-- react-player (视频播放)
 
 ## 常用命令
 
@@ -173,6 +172,5 @@ Type 类型：`feat` / `fix` / `style` / `refactor` / `perf` / `docs` / `chore`
 
 - **react-router-dom**：路由管理，使用 v6 新 API
 - **react-markdown**：Markdown 渲染，配合 remark-gfm（GFM 语法）和 rehype-highlight（代码高亮）
-- **react-player**：视频播放，支持 B 站等多平台
 - **react-icons**：图标库，包含 Font Awesome、Simple Icons 等
 - **highlight.js**：代码高亮样式（使用 github 主题）
