@@ -24,6 +24,7 @@ function Videos() {
           Videos
         </h1>
         <p className="font-serif tracking-wide text-text-secondary">我的视频作品集</p>
+        <p className="mt-2 text-sm text-text-tertiary">Powered by CapCut & Bilibili Cut</p>
       </div>
 
       {/* 视频网格 - 两栏布局 */}
