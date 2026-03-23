@@ -8,7 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-<!-- 新增功能将记录在这里 -->
+- 🔍 完整的 SEO 优化支持
+  - 集成 react-helmet-async 管理页面 meta 标签
+  - 为所有页面添加独立的 SEO 配置（title、description、keywords）
+  - 添加 Open Graph 标签，优化社交媒体分享效果
+  - 添加 Twitter Card 标签
+  - 实现结构化数据（JSON-LD）用于搜索引擎
+  - 生成 sitemap.xml 文件
+  - 配置 robots.txt 文件
+- 📄 创建 SEO 组件和配置文件
+  - SEO 组件支持文章类型的特殊标签（发布时间、修改时间）
+  - 统一的 SEO 配置管理
 
 ### Changed
 <!-- 功能变更将记录在这里 -->

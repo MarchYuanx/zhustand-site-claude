@@ -1,5 +1,7 @@
 import GitHubContributions from '../components/features/GitHubContributions'
 import SocialLinks from '../components/features/SocialLinks'
+import SEO from '../components/common/SEO'
+import { SEO_CONFIG, SITE_INFO } from '../constants/seo'
 
 /**
  * About Me 页面 - 美式极简风格
@@ -13,7 +15,16 @@ import SocialLinks from '../components/features/SocialLinks'
  */
 function About() {
   return (
-    <div className="flex min-h-[80vh] flex-col items-center justify-center px-6 py-16">
+    <>
+      <SEO
+        title={SEO_CONFIG.about.title}
+        description={SEO_CONFIG.about.description}
+        keywords={SEO_CONFIG.about.keywords}
+        url={`${SITE_INFO.url}/about`}
+        type={SEO_CONFIG.about.type}
+        author={SITE_INFO.author}
+      />
+      <div className="flex min-h-[80vh] flex-col items-center justify-center px-6 py-16">
       {/* 内容区 */}
       <div className="w-full max-w-4xl">
         {/* 标题 - 艺术字体 */}
@@ -46,6 +57,7 @@ function About() {
         </div>
       </div>
     </div>
+    </>
   )
 }
 

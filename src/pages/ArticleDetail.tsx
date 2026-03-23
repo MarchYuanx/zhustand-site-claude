@@ -6,6 +6,8 @@ import rehypeHighlight from 'rehype-highlight'
 import Loading from '../components/common/Loading'
 import { loadArticles } from '../utils/fileLoader'
 import type { ArticleData } from '../utils/fileLoader'
+import SEO from '../components/common/SEO'
+import { SITE_INFO } from '../constants/seo'
 import 'highlight.js/styles/github.css'
 
 /**
@@ -104,7 +106,17 @@ function ArticleDetail() {
   }
 
   return (
-    <div className="relative mx-auto max-w-[1600px] px-6 py-12 lg:px-12">
+    <>
+      <SEO
+        title={article.title}
+        description={article.content.substring(0, 150)}
+        keywords="文章, 博客, 技术分享"
+        url={`${SITE_INFO.url}/articles/${article.id}`}
+        type="article"
+        author={SITE_INFO.author}
+        publishedTime={article.date}
+      />
+      <div className="relative mx-auto max-w-[1600px] px-6 py-12 lg:px-12">
       {/* 两栏布局 */}
       <div className="flex gap-16">
         {/* 左侧：目录栏 */}
@@ -274,7 +286,8 @@ function ArticleDetail() {
 
       {/* 扩展点：评论/点赞组件插槽 */}
       {/* <Comments articleId={article.id} /> */}
-    </div>
+      </div>
+    </>
   )
 }
 

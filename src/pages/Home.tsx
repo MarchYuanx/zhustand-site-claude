@@ -1,5 +1,7 @@
 import SocialLinks from '../components/features/SocialLinks'
 import { TECH_STACK } from '../constants'
+import SEO from '../components/common/SEO'
+import { SEO_CONFIG, SITE_INFO } from '../constants/seo'
 
 /**
  * 首页 Hero 模块 - 美式极简风格
@@ -16,7 +18,16 @@ import { TECH_STACK } from '../constants'
  */
 function Home() {
   return (
-    <div className="flex min-h-[80vh] flex-col items-center justify-center">
+    <>
+      <SEO
+        title={SEO_CONFIG.home.title}
+        description={SEO_CONFIG.home.description}
+        keywords={SEO_CONFIG.home.keywords}
+        url={SITE_INFO.url}
+        type={SEO_CONFIG.home.type}
+        author={SITE_INFO.author}
+      />
+      <div className="flex min-h-[80vh] flex-col items-center justify-center">
       {/* Hero 内容区 */}
       <div className="text-center">
         {/* 姓名 - 视觉焦点 - 艺术字体 */}
@@ -69,6 +80,7 @@ function Home() {
         </div>
       </div>
     </div>
+    </>
   )
 }
 

@@ -1,5 +1,7 @@
 import { useMusicStore } from '../stores/musicStore'
 import { FaMusic, FaCheck } from 'react-icons/fa'
+import SEO from '../components/common/SEO'
+import { SEO_CONFIG, SITE_INFO } from '../constants/seo'
 
 /**
  * 设置页面
@@ -14,7 +16,16 @@ function Settings() {
   const musicList = useMusicStore((state) => state.getMusicList())
 
   return (
-    <div className="min-h-[calc(100vh-12rem)] py-8">
+    <>
+      <SEO
+        title={SEO_CONFIG.settings.title}
+        description={SEO_CONFIG.settings.description}
+        keywords={SEO_CONFIG.settings.keywords}
+        url={`${SITE_INFO.url}/settings`}
+        type={SEO_CONFIG.settings.type}
+        author={SITE_INFO.author}
+      />
+      <div className="min-h-[calc(100vh-12rem)] py-8">
       {/* 页面标题 - 艺术字体 */}
       <div className="mb-12 text-center">
         <h1 className="mb-4 font-serif text-5xl font-bold tracking-tight text-text-primary dark:text-gray-100">
@@ -93,6 +104,7 @@ function Settings() {
         </div>
       </div>
     </div>
+    </>
   )
 }
 

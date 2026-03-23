@@ -1,5 +1,7 @@
 import VideoCard from '../components/features/VideoCard'
 import { videos } from '../constants/videos'
+import SEO from '../components/common/SEO'
+import { SEO_CONFIG, SITE_INFO } from '../constants/seo'
 
 /**
  * 视频作品展示页
@@ -17,7 +19,16 @@ import { videos } from '../constants/videos'
 function Videos() {
 
   return (
-    <div className="py-8">
+    <>
+      <SEO
+        title={SEO_CONFIG.videos.title}
+        description={SEO_CONFIG.videos.description}
+        keywords={SEO_CONFIG.videos.keywords}
+        url={`${SITE_INFO.url}/videos`}
+        type={SEO_CONFIG.videos.type}
+        author={SITE_INFO.author}
+      />
+      <div className="py-8">
       {/* 页面标题 - 艺术字体 */}
       <div className="mb-12 text-center">
         <h1 className="mb-4 font-serif text-5xl font-bold tracking-tight text-text-primary dark:text-gray-100">
@@ -34,6 +45,7 @@ function Videos() {
         ))}
       </div>
     </div>
+    </>
   )
 }
 

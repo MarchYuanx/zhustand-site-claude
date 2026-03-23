@@ -4,6 +4,8 @@ import Card from '../components/common/Card'
 import Loading from '../components/common/Loading'
 import { loadArticles } from '../utils/fileLoader'
 import type { ArticleData } from '../utils/fileLoader'
+import SEO from '../components/common/SEO'
+import { SEO_CONFIG, SITE_INFO } from '../constants/seo'
 
 /**
  * 文章列表页
@@ -34,7 +36,16 @@ function Articles() {
   if (loading) return <Loading />
 
   return (
-    <div className="py-8">
+    <>
+      <SEO
+        title={SEO_CONFIG.articles.title}
+        description={SEO_CONFIG.articles.description}
+        keywords={SEO_CONFIG.articles.keywords}
+        url={`${SITE_INFO.url}/articles`}
+        type={SEO_CONFIG.articles.type}
+        author={SITE_INFO.author}
+      />
+      <div className="py-8">
       {/* 页面标题 - 艺术字体 */}
       <div className="mb-12 text-center">
         <h1 className="mb-4 font-serif text-5xl font-bold tracking-tight text-text-primary dark:text-gray-100">
@@ -81,6 +92,7 @@ function Articles() {
         </div>
       )}
     </div>
+    </>
   )
 }
 

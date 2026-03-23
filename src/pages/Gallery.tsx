@@ -4,6 +4,8 @@ import Loading from '../components/common/Loading'
 import { loadImages } from '../utils/fileLoader'
 import type { ImageData } from '../utils/fileLoader'
 import { getImageMetadata } from '../constants/imageMetadata'
+import SEO from '../components/common/SEO'
+import { SEO_CONFIG, SITE_INFO } from '../constants/seo'
 
 /**
  * 图片作品展示页
@@ -39,7 +41,16 @@ function Gallery() {
   if (loading) return <Loading />
 
   return (
-    <div className="py-8">
+    <>
+      <SEO
+        title={SEO_CONFIG.gallery.title}
+        description={SEO_CONFIG.gallery.description}
+        keywords={SEO_CONFIG.gallery.keywords}
+        url={`${SITE_INFO.url}/gallery`}
+        type={SEO_CONFIG.gallery.type}
+        author={SITE_INFO.author}
+      />
+      <div className="py-8">
       {/* 页面标题 - 艺术字体 */}
       <div className="mb-12 text-center">
         <h1 className="mb-4 font-serif text-5xl font-bold tracking-tight text-text-primary dark:text-gray-100">
@@ -63,7 +74,8 @@ function Gallery() {
           </p>
         </div>
       )}
-    </div>
+      </div>
+    </>
   )
 }
 
