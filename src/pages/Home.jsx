@@ -30,13 +30,16 @@ function Home() {
       {/* Hero 内容区 */}
       <div className="text-center">
         {/* 姓名 - 视觉焦点 - 艺术字体 */}
-        <h1 className="group relative mb-6 font-serif text-7xl font-bold tracking-tight text-transparent md:text-8xl lg:text-9xl">
+        <h1 className="group relative mb-6 font-serif text-7xl font-bold tracking-tight md:text-8xl lg:text-9xl">
           {/* 渐变文字效果 */}
-          <span className="bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 bg-clip-text transition-all duration-500 group-hover:from-gray-800 group-hover:via-gray-600 group-hover:to-gray-800">
-            Zhustand
+          <span className="inline-block bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-transparent transition-transform duration-500 group-hover:-translate-x-2">
+            Zhu
           </span>
-          {/* 微妙的文字阴影 */}
-          <span className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-100/30 via-purple-100/20 to-pink-100/30 bg-clip-text blur-2xl">
+          <span className="inline-block bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-transparent transition-transform duration-500 group-hover:translate-x-2">
+            stand
+          </span>
+          {/* 微妙的文字阴影 - 保持静止 */}
+          <span className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-100/30 via-purple-100/20 to-pink-100/30 bg-clip-text text-transparent blur-2xl">
             Zhustand
           </span>
         </h1>
