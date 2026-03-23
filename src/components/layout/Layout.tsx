@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import Header from './Header'
 import MusicPlayer from '../features/MusicPlayer'
 import { useMusic } from '../../contexts/MusicContext'
@@ -11,7 +12,12 @@ import { useMusic } from '../../contexts/MusicContext'
  * - 全局音乐播放器（根据设置显示/隐藏）
  * - 预留 Footer 扩展位置
  */
-function Layout({ children }) {
+
+interface LayoutProps {
+  children: ReactNode
+}
+
+function Layout({ children }: LayoutProps) {
   const { showPlayer } = useMusic()
 
   return (

@@ -41,7 +41,7 @@ function Header() {
     }
   }, [isMobileMenuOpen])
 
-  const isActive = (path) => {
+  const isActive = (path: string): boolean => {
     // 首页精确匹配
     if (path === '/') return location.pathname === '/'
     // 其他页面支持前缀匹配（如 /articles 匹配 /articles/xxx）
@@ -49,7 +49,7 @@ function Header() {
   }
 
   // 星星特效处理函数
-  const handleLogoClick = (e) => {
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
@@ -61,7 +61,7 @@ function Header() {
   }
 
   // 创建单个星星元素
-  const createStar = (x, y) => {
+  const createStar = (x: number, y: number, index: number) => {
     const star = document.createElement('div')
     star.innerHTML = '★'
 

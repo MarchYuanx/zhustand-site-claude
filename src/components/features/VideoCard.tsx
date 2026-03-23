@@ -16,11 +16,17 @@ import Card from '../common/Card'
  * - 响应式 16:9 比例
  * - 加载时显示骨架屏
  */
-function VideoCard({ url, title }) {
+
+interface VideoCardProps {
+  url: string
+  title: string
+}
+
+function VideoCard({ url, title }: VideoCardProps) {
   const [isLoading, setIsLoading] = useState(true)
 
   // 从 URL 中提取 BV 号
-  const getBvid = (url) => {
+  const getBvid = (url: string): string => {
     const match = url.match(/BV[\w]+/)
     return match ? match[0] : ''
   }
