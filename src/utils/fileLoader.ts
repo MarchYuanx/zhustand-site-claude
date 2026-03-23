@@ -8,11 +8,24 @@
  * 使用 Vite 的 import.meta.glob 实现自动扫描
  */
 
+export interface ImageData {
+  src: string
+  name: string
+  alt: string
+}
+
+export interface ArticleData {
+  id: string
+  title: string
+  content: string
+  date: string
+}
+
 /**
  * 加载图片文件
  * @returns {Promise<Array>} 图片数组 [{ src, name }]
  */
-export async function loadImages() {
+export async function loadImages(): Promise<ImageData[]> {
   try {
     // Vite 动态导入 - 自动扫描 public/assets/images 目录
     const imageModules = import.meta.glob('/public/assets/images/*.(png|jpg|jpeg|webp|svg)', {
@@ -21,9 +34,9 @@ export async function loadImages() {
     })
 
     const images = Object.entries(imageModules).map(([path, url]) => ({
-      src: url,
-      name: path.split('/').pop(),
-      alt: path.split('/').pop().split('.')[0],
+      src: url as string,
+      name: path.split('/').pop() || '',
+      alt: path.split('/').pop()?.split('.')[0] || '',
     }))
 
     return images
@@ -37,7 +50,7 @@ export async function loadImages() {
  * 加载 Markdown 文章
  * @returns {Promise<Array>} 文章数组 [{ id, title, content, date }]
  */
-export async function loadArticles() {
+export async function loadArticles(): Promise<ArticleData[]> {
   try {
     const articleModules = import.meta.glob('/public/assets/articles/*.md', {
       as: 'raw',
@@ -45,8 +58,8 @@ export async function loadArticles() {
 
     const articles = await Promise.all(
       Object.entries(articleModules).map(async ([path, loader]) => {
-        const content = await loader()
-        const filename = path.split('/').pop().replace('.md', '')
+        const content = await loader() as string
+        const filename = path.split('/').pop()?.replace('.md', '') || ''
 
         // 解析 Markdown 前置元数据（可选）
         const titleMatch = content.match(/^#\s+(.+)$/m)
@@ -61,7 +74,7 @@ export async function loadArticles() {
       })
     )
 
-    return articles.sort((a, b) => new Date(b.date) - new Date(a.date))
+    return articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   } catch (error) {
     console.error('Failed to load articles:', error)
     return []

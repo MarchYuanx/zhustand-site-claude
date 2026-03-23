@@ -9,7 +9,13 @@
  * - description: 视频描述（可选）
  */
 
-export const videos = [
+export interface Video {
+  url: string
+  title: string
+  description?: string
+}
+
+export const videos: Video[] = [
   {
     url: 'https://www.bilibili.com/video/BV15D7NzvEkW/',
     title: '丰川家的黑暗这一块',
