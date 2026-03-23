@@ -105,16 +105,24 @@ function Header() {
           <div className="hidden items-center gap-6 md:flex">
             <ul className="flex gap-8">
               {NAV_ITEMS.map((item) => (
-                <li key={item.path}>
+                <li key={item.path} className="relative">
                   <Link
                     to={item.path}
-                    className={`font-serif text-sm font-medium tracking-wide transition-all duration-200 hover:tracking-wider hover:text-primary ${
+                    className={`relative font-serif text-sm font-medium tracking-wide transition-colors duration-200 hover:text-primary ${
                       isActive(item.path)
                         ? 'text-primary'
                         : 'text-text-secondary dark:text-gray-400'
                     }`}
                   >
                     {item.label}
+                    {/* 下划线指示器 */}
+                    {isActive(item.path) && (
+                      <motion.div
+                        layoutId="nav-indicator"
+                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      />
+                    )}
                   </Link>
                 </li>
               ))}
