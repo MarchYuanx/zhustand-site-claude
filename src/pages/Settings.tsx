@@ -13,7 +13,7 @@ import PageTransition from '@/components/common/PageTransition'
  * - 设置自动保存到 localStorage
  */
 function Settings() {
-  const { showPlayer, setShowPlayer, selectedMusicId, setSelectedMusicId } = useMusicStore()
+  const { showPlayer, setShowPlayer, selectedMusicId, setSelectedMusicId, loopSingle, setLoopSingle } = useMusicStore()
   const musicList = useMusicStore((state) => state.getMusicList())
 
   return (
@@ -37,7 +37,7 @@ function Settings() {
 
       {/* 设置卡片容器 */}
       <div className="mx-auto max-w-2xl space-y-6">
-        {/* 音乐播放器开关 */}
+        {/* 音乐播放器设置 */}
         <div className="card p-6 dark:bg-gray-800/50">
           <div className="mb-4 flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 dark:bg-primary/20">
@@ -45,23 +45,39 @@ function Settings() {
             </div>
             <div>
               <h2 className="text-lg font-semibold text-text-primary dark:text-gray-100">音乐播放器</h2>
-              <p className="text-sm text-text-tertiary dark:text-gray-400">控制页面右下角的音乐播放器显示</p>
+              <p className="text-sm text-text-tertiary dark:text-gray-400">控制页面右下角的音乐播放器</p>
             </div>
           </div>
 
-          <label className="flex cursor-pointer items-center justify-between rounded-xl bg-surface-elevated p-4 transition-colors hover:bg-gray-100 dark:bg-gray-700/50 dark:hover:bg-gray-700">
-            <span className="text-text-secondary dark:text-gray-200">显示音乐播放器</span>
-            <div className="relative">
-              <input
-                type="checkbox"
-                checked={showPlayer}
-                onChange={(e) => setShowPlayer(e.target.checked)}
-                className="peer sr-only"
-              />
-              <div className="h-6 w-11 rounded-full bg-gray-300 transition-colors peer-checked:bg-primary dark:bg-gray-600 dark:peer-checked:bg-primary"></div>
-              <div className="absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow-md transition-transform peer-checked:translate-x-5"></div>
-            </div>
-          </label>
+          <div className="space-y-3">
+            <label className="flex cursor-pointer items-center justify-between rounded-xl bg-surface-elevated p-4 transition-colors hover:bg-gray-100 dark:bg-gray-700/50 dark:hover:bg-gray-700">
+              <span className="text-text-secondary dark:text-gray-200">显示音乐播放器</span>
+              <div className="relative">
+                <input
+                  type="checkbox"
+                  checked={showPlayer}
+                  onChange={(e) => setShowPlayer(e.target.checked)}
+                  className="peer sr-only"
+                />
+                <div className="h-6 w-11 rounded-full bg-gray-300 transition-colors peer-checked:bg-primary dark:bg-gray-600 dark:peer-checked:bg-primary"></div>
+                <div className="absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow-md transition-transform peer-checked:translate-x-5"></div>
+              </div>
+            </label>
+
+            <label className="flex cursor-pointer items-center justify-between rounded-xl bg-surface-elevated p-4 transition-colors hover:bg-gray-100 dark:bg-gray-700/50 dark:hover:bg-gray-700">
+              <span className="text-text-secondary dark:text-gray-200">单曲循环</span>
+              <div className="relative">
+                <input
+                  type="checkbox"
+                  checked={loopSingle}
+                  onChange={(e) => setLoopSingle(e.target.checked)}
+                  className="peer sr-only"
+                />
+                <div className="h-6 w-11 rounded-full bg-gray-300 transition-colors peer-checked:bg-primary dark:bg-gray-600 dark:peer-checked:bg-primary"></div>
+                <div className="absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow-md transition-transform peer-checked:translate-x-5"></div>
+              </div>
+            </label>
+          </div>
         </div>
 
         {/* 音乐选择 */}

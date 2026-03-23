@@ -45,8 +45,10 @@ export const DEFAULT_MUSIC_ID = MUSIC_LIST.find((music) => music.isDefault)?.id 
 interface MusicState {
   showPlayer: boolean
   selectedMusicId: number
+  loopSingle: boolean
   setShowPlayer: (show: boolean) => void
   setSelectedMusicId: (id: number) => void
+  setLoopSingle: (loop: boolean) => void
   getCurrentMusic: () => Music
   getMusicList: () => Music[]
 }
@@ -64,8 +66,10 @@ export const useMusicStore = create<MusicState>()(
     (set, get) => ({
       showPlayer: true,
       selectedMusicId: DEFAULT_MUSIC_ID,
+      loopSingle: false,
       setShowPlayer: (show) => set({ showPlayer: show }),
       setSelectedMusicId: (id) => set({ selectedMusicId: id }),
+      setLoopSingle: (loop) => set({ loopSingle: loop }),
       getCurrentMusic: () => {
         const { selectedMusicId } = get()
         return MUSIC_LIST.find((music) => music.id === selectedMusicId) || MUSIC_LIST[0]

@@ -18,6 +18,7 @@ import { Z_INDEX, ANIMATION_DURATION } from '@/constants'
  */
 function MusicPlayer() {
   const currentMusic = useMusicStore((state) => state.getCurrentMusic())
+  const loopSingle = useMusicStore((state) => state.loopSingle)
   const audioRef = useRef<HTMLAudioElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
@@ -27,14 +28,23 @@ function MusicPlayer() {
   // 使用从 Context 获取的歌曲信息
   const songInfo = currentMusic
 
-  // 当歌曲切换时，停止播放并重置状态
+  // 当歌曲切换时，保持之前的播放状态
   useEffect(() => {
     if (audioRef.current) {
+      const wasPlaying = isPlaying
       audioRef.current.pause()
       audioRef.current.currentTime = 0
-      setIsPlaying(false)
       setCurrentTime(0)
       setDuration(0)
+
+      // 如果之前正在播放，则自动播放新音乐
+      if (wasPlaying) {
+        audioRef.current.play().catch(() => {
+          setIsPlaying(false)
+        })
+      } else {
+        setIsPlaying(false)
+      }
     }
   }, [currentMusic.id])
 
@@ -90,6 +100,21 @@ function MusicPlayer() {
     return `${minutes}:${seconds.toString().padStart(2, '0')}`
   }
 
+  // 处理歌曲播放结束
+  const handleEnded = () => {
+    if (loopSingle) {
+      // 单曲循环：重新播放
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0
+        audioRef.current.play()
+        setIsPlaying(true)
+      }
+    } else {
+      // 不循环：停止播放
+      setIsPlaying(false)
+    }
+  }
+
   // 计算进度百分比
   const progress = duration > 0 ? (currentTime / duration) * 100 : 0
 
@@ -101,7 +126,7 @@ function MusicPlayer() {
         src={songInfo.url}
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleLoadedMetadata}
-        onEnded={() => setIsPlaying(false)}
+        onEnded={handleEnded}
       />
 
       <div className="fixed bottom-6 right-6" style={{ zIndex: Z_INDEX.MUSIC_PLAYER }}>
