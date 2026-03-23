@@ -1,3 +1,5 @@
+import { HTMLAttributes } from 'react'
+
 /**
  * 通用卡片组件 - 美式设计风格
  *
@@ -8,7 +10,13 @@
  *
  * 扩展点：可添加 padding、shadow 等变体
  */
-function Card({ children, className = '', hover = true, ...props }) {
+
+interface CardProps extends HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode
+  hover?: boolean
+}
+
+function Card({ children, className = '', hover = true, ...props }: CardProps) {
   return (
     <div
       className={`card ${hover ? 'hover:scale-[1.02]' : ''} ${className}`}

@@ -13,14 +13,21 @@ import { useEffect } from 'react'
  * - ESC 键关闭
  * - 防止背景滚动
  */
-function Modal({ isOpen, onClose, children }) {
+
+interface ModalProps {
+  isOpen: boolean
+  onClose: () => void
+  children: React.ReactNode
+}
+
+function Modal({ isOpen, onClose, children }: ModalProps) {
   useEffect(() => {
     if (isOpen) {
       // 禁止背景滚动
       document.body.style.overflow = 'hidden'
 
       // ESC 键关闭
-      const handleEsc = (e) => {
+      const handleEsc = (e: KeyboardEvent) => {
         if (e.key === 'Escape') onClose()
       }
       window.addEventListener('keydown', handleEsc)

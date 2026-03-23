@@ -1,3 +1,5 @@
+import { ButtonHTMLAttributes } from 'react'
+
 /**
  * 通用按钮组件
  *
@@ -9,7 +11,13 @@
  *
  * 扩展点：可添加 size、disabled、loading 等状态
  */
-function Button({ variant = 'primary', children, onClick, className = '', ...props }) {
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary'
+  children: React.ReactNode
+}
+
+function Button({ variant = 'primary', children, onClick, className = '', ...props }: ButtonProps) {
   const baseClass = variant === 'primary' ? 'btn-primary' : 'btn-secondary'
 
   return (
