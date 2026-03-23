@@ -1,4 +1,4 @@
-import { useMusic } from '../contexts/MusicContext'
+import { useMusicStore } from '../stores/musicStore'
 import { FaMusic, FaCheck } from 'react-icons/fa'
 
 /**
@@ -10,7 +10,8 @@ import { FaMusic, FaCheck } from 'react-icons/fa'
  * - 设置自动保存到 localStorage
  */
 function Settings() {
-  const { showPlayer, setShowPlayer, selectedMusicId, setSelectedMusicId, musicList } = useMusic()
+  const { showPlayer, setShowPlayer, selectedMusicId, setSelectedMusicId } = useMusicStore()
+  const musicList = useMusicStore((state) => state.getMusicList())
 
   return (
     <div className="min-h-[calc(100vh-12rem)] py-8">

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import Header from './Header'
 import MusicPlayer from '../features/MusicPlayer'
-import { useMusic } from '../../contexts/MusicContext'
+import { useMusicStore } from '../../stores/musicStore'
 
 /**
  * 页面布局容器
@@ -18,7 +18,7 @@ interface LayoutProps {
 }
 
 function Layout({ children }: LayoutProps) {
-  const { showPlayer } = useMusic()
+  const showPlayer = useMusicStore((state) => state.showPlayer)
 
   return (
     <div className="min-h-screen bg-surface-base dark:bg-gray-900">

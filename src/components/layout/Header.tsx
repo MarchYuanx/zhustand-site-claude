@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { HiMenu, HiX, HiSun, HiMoon } from 'react-icons/hi'
 import { NAV_ITEMS, Z_INDEX, ANIMATION_DURATION, STAR_EFFECT } from '../../constants'
-import { useTheme } from '../../contexts/ThemeContext'
+import { useThemeStore } from '../../stores/themeStore'
 
 /**
  * 顶部导航组件 - 美式极简风格
@@ -16,7 +16,7 @@ import { useTheme } from '../../contexts/ThemeContext'
 function Header() {
   const location = useLocation()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const { theme, toggleTheme } = useTheme()
+  const { theme, toggleTheme } = useThemeStore()
 
   // 路由变化时关闭移动菜单
   useEffect(() => {

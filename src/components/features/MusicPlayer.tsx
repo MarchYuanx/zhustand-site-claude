@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { FaPlay, FaPause, FaMusic } from 'react-icons/fa'
-import { useMusic } from '../../contexts/MusicContext'
+import { useMusicStore } from '../../stores/musicStore'
 import { Z_INDEX, ANIMATION_DURATION } from '../../constants'
 
 /**
@@ -17,7 +17,7 @@ import { Z_INDEX, ANIMATION_DURATION } from '../../constants'
  * - 支持从设置页面选择不同的音乐
  */
 function MusicPlayer() {
-  const { currentMusic } = useMusic()
+  const currentMusic = useMusicStore((state) => state.getCurrentMusic())
   const audioRef = useRef<HTMLAudioElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
