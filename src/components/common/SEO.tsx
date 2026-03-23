@@ -24,7 +24,7 @@ const SEO = ({
   modifiedTime,
 }: SEOProps) => {
   const siteTitle = 'Zhustand';
-  const fullTitle = title === siteTitle ? title : `${siteTitle} | ${title}`;
+  const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
 
   // 结构化数据（JSON-LD）
   const structuredData =
