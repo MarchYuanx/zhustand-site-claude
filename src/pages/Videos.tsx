@@ -1,5 +1,5 @@
 import VideoCard from '../components/features/VideoCard'
-import { videos } from '../config/videos'
+import { videos } from '../constants/videos'
 
 /**
  * 视频作品展示页

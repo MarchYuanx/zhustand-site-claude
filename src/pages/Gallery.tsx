@@ -3,7 +3,7 @@ import ImageGrid from '../components/features/ImageGrid'
 import Loading from '../components/common/Loading'
 import { loadImages } from '../utils/fileLoader'
 import type { ImageData } from '../utils/fileLoader'
-import { getImageMetadata } from '../data/imageMetadata'
+import { getImageMetadata } from '../constants/imageMetadata'
 
 /**
  * 图片作品展示页
