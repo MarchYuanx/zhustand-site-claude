@@ -41,6 +41,7 @@ function Articles() {
           Articles
         </h1>
         <p className="font-serif tracking-wide text-text-secondary">我的文章作品集</p>
+        <p className="mt-2 text-sm text-text-tertiary">Powered by Claude Code</p>
       </div>
 
       {/* 扩展点：搜索/筛选组件插槽 */}
