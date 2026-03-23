@@ -64,22 +64,30 @@ function VideoCard({ url, title }: VideoCardProps) {
       {/* 视频元数据 */}
       {!infoLoading && videoInfo && (
         <div className="mb-4 flex flex-wrap items-center gap-4 text-sm text-text-secondary">
-          <div className="flex items-center gap-1.5">
-            <FaPlay className="h-3.5 w-3.5" />
-            <span>{formatNumber(videoInfo.view)}</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <FaThumbsUp className="h-3.5 w-3.5" />
-            <span>{formatNumber(videoInfo.like)}</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <FaCoins className="h-3.5 w-3.5" />
-            <span>{formatNumber(videoInfo.coin)}</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <FaStar className="h-3.5 w-3.5" />
-            <span>{formatNumber(videoInfo.favorite)}</span>
-          </div>
+          {videoInfo.view !== undefined && (
+            <div className="flex items-center gap-1.5">
+              <FaPlay className="h-3.5 w-3.5" />
+              <span>{formatNumber(videoInfo.view)}</span>
+            </div>
+          )}
+          {videoInfo.like !== undefined && (
+            <div className="flex items-center gap-1.5">
+              <FaThumbsUp className="h-3.5 w-3.5" />
+              <span>{formatNumber(videoInfo.like)}</span>
+            </div>
+          )}
+          {videoInfo.coin !== undefined && (
+            <div className="flex items-center gap-1.5">
+              <FaCoins className="h-3.5 w-3.5" />
+              <span>{formatNumber(videoInfo.coin)}</span>
+            </div>
+          )}
+          {videoInfo.favorite !== undefined && (
+            <div className="flex items-center gap-1.5">
+              <FaStar className="h-3.5 w-3.5" />
+              <span>{formatNumber(videoInfo.favorite)}</span>
+            </div>
+          )}
         </div>
       )}
 

@@ -10,7 +10,11 @@
       "Bash(git commit:*)",
       "mcp__ide__getDiagnostics",
       "Bash(git rm:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm tsc:*)",
+      "Bash(git mv:*)",
+      "Bash(pnpm build:*)"
     ]
   }
 }

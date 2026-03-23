@@ -31,7 +31,16 @@ export interface BilibiliVideoInfo {
  */
 export async function getBilibiliVideoInfo(bvid: string): Promise<BilibiliVideoInfo | null> {
   try {
-    const response = await fetch(`https://api.bilibili.com/x/web-interface/view?bvid=${bvid}`)
+    // 开发环境使用代理，生产环境直接调用（需要后端支持）
+    const apiUrl = import.meta.env.DEV
+      ? `/api/bilibili/x/web-interface/view?bvid=${bvid}`
+      : `https://api.bilibili.com/x/web-interface/view?bvid=${bvid}`
+
+    const response = await fetch(apiUrl, {
+      headers: {
+        'Referer': 'https://www.bilibili.com',
+      }
+    })
     const data = await response.json()
 
     if (data.code === 0 && data.data) {
@@ -50,7 +59,10 @@ export async function getBilibiliVideoInfo(bvid: string): Promise<BilibiliVideoI
  * @param num - 数字
  * @returns 格式化后的字符串（如 1.2万）
  */
-export function formatNumber(num: number): string {
+export function formatNumber(num: number | undefined): string {
+  if (num === undefined || num === null || isNaN(num)) {
+    return '0'
+  }
   if (num >= 100000000) {
     return `${(num / 100000000).toFixed(1)}亿`
   }
