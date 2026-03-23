@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { FaPlay, FaPause, FaMusic } from 'react-icons/fa'
-import { useMusicStore } from '../../stores/musicStore'
-import { Z_INDEX, ANIMATION_DURATION } from '../../constants'
+import { useMusicStore } from '@/stores/musicStore'
+import { Z_INDEX, ANIMATION_DURATION } from '@/constants'
 
 /**
  * 背景音乐播放器 - Claude 风格 + 可折叠

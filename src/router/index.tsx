@@ -1,18 +1,18 @@
 import { lazy, Suspense } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
-import Loading from '../components/common/Loading'
-import { ROUTES } from '../constants'
+import Loading from '@/components/common/Loading'
+import { ROUTES } from '@/constants'
 
 // 懒加载页面组件 - 提升首屏加载性能
-const Home = lazy(() => import('../pages/Home'))
-const Gallery = lazy(() => import('../pages/Gallery'))
-const Videos = lazy(() => import('../pages/Videos'))
-const Articles = lazy(() => import('../pages/Articles'))
-const ArticleDetail = lazy(() => import('../pages/ArticleDetail'))
-const About = lazy(() => import('../pages/About'))
-const Settings = lazy(() => import('../pages/Settings'))
-const NotFound = lazy(() => import('../pages/NotFound'))
+const Home = lazy(() => import('@/pages/Home'))
+const Gallery = lazy(() => import('@/pages/Gallery'))
+const Videos = lazy(() => import('@/pages/Videos'))
+const Articles = lazy(() => import('@/pages/Articles'))
+const ArticleDetail = lazy(() => import('@/pages/ArticleDetail'))
+const About = lazy(() => import('@/pages/About'))
+const Settings = lazy(() => import('@/pages/Settings'))
+const NotFound = lazy(() => import('@/pages/NotFound'))
 
 /**
  * 路由配置 - 采用懒加载 + 模块化设计

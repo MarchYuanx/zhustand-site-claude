@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiCopy, FiCheck } from 'react-icons/fi'
-import type { ImageData } from '../../utils/fileLoader'
-import { staggerContainer, fadeInUpVariants, overlayVariants } from '../../config/animations'
+import type { ImageData } from '@/utils/fileLoader'
+import { staggerContainer, fadeInUpVariants, overlayVariants } from '@/config/animations'
 
 /**
  * 图片网格组件 - 美式网格布局

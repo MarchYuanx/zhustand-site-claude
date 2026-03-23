@@ -1,8 +1,8 @@
-import { useMusicStore } from '../stores/musicStore'
+import { useMusicStore } from '@/stores/musicStore'
 import { FaMusic, FaCheck } from 'react-icons/fa'
-import SEO from '../components/common/SEO'
-import { SEO_CONFIG, SITE_INFO } from '../constants/seo'
-import PageTransition from '../components/common/PageTransition'
+import SEO from '@/components/common/SEO'
+import { SEO_CONFIG, SITE_INFO } from '@/constants/seo'
+import PageTransition from '@/components/common/PageTransition'
 
 /**
  * 设置页面

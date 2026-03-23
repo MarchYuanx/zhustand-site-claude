@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
-import ImageGrid from '../components/features/ImageGrid'
-import Loading from '../components/common/Loading'
-import { loadImages } from '../utils/fileLoader'
-import type { ImageData } from '../utils/fileLoader'
-import { getImageMetadata } from '../constants/imageMetadata'
-import SEO from '../components/common/SEO'
-import { SEO_CONFIG, SITE_INFO } from '../constants/seo'
-import PageTransition from '../components/common/PageTransition'
+import ImageGrid from '@/components/features/ImageGrid'
+import Loading from '@/components/common/Loading'
+import { loadImages } from '@/utils/fileLoader'
+import type { ImageData } from '@/utils/fileLoader'
+import { getImageMetadata } from '@/constants/imageMetadata'
+import SEO from '@/components/common/SEO'
+import { SEO_CONFIG, SITE_INFO } from '@/constants/seo'
+import PageTransition from '@/components/common/PageTransition'
 
 /**
  * 图片作品展示页

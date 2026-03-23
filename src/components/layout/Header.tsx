@@ -2,9 +2,9 @@ import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HiMenu, HiX, HiSun, HiMoon } from 'react-icons/hi'
-import { NAV_ITEMS, Z_INDEX, ANIMATION_DURATION, STAR_EFFECT } from '../../constants'
-import { useThemeStore } from '../../stores/themeStore'
-import { mobileMenuVariants, mobileMenuTransition, overlayVariants } from '../../config/animations'
+import { NAV_ITEMS, Z_INDEX, ANIMATION_DURATION, STAR_EFFECT } from '@/constants'
+import { useThemeStore } from '@/stores/themeStore'
+import { mobileMenuVariants, mobileMenuTransition, overlayVariants } from '@/config/animations'
 
 /**
  * 顶部导航组件 - 美式极简风格

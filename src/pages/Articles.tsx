@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import Card from '../components/common/Card'
-import Loading from '../components/common/Loading'
-import { loadArticles } from '../utils/fileLoader'
-import type { ArticleData } from '../utils/fileLoader'
-import SEO from '../components/common/SEO'
-import { SEO_CONFIG, SITE_INFO } from '../constants/seo'
-import PageTransition from '../components/common/PageTransition'
-import { staggerContainer, fadeInUpVariants } from '../config/animations'
+import Card from '@/components/common/Card'
+import Loading from '@/components/common/Loading'
+import { loadArticles } from '@/utils/fileLoader'
+import type { ArticleData } from '@/utils/fileLoader'
+import SEO from '@/components/common/SEO'
+import { SEO_CONFIG, SITE_INFO } from '@/constants/seo'
+import PageTransition from '@/components/common/PageTransition'
+import { staggerContainer, fadeInUpVariants } from '@/config/animations'
 
 /**
  * 文章列表页

@@ -1,9 +1,9 @@
 import { ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import Header from './Header'
-import MusicPlayer from '../features/MusicPlayer'
-import { useMusicStore } from '../../stores/musicStore'
-import { useThemeStore } from '../../stores/themeStore'
+import MusicPlayer from '@/components/features/MusicPlayer'
+import { useMusicStore } from '@/stores/musicStore'
+import { useThemeStore } from '@/stores/themeStore'
 
 /**
  * 页面布局容器

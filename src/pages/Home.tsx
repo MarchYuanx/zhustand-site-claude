@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion'
-import SocialLinks from '../components/features/SocialLinks'
-import { TECH_STACK } from '../constants'
-import SEO from '../components/common/SEO'
-import { SEO_CONFIG, SITE_INFO } from '../constants/seo'
-import PageTransition from '../components/common/PageTransition'
+import SocialLinks from '@/components/features/SocialLinks'
+import { TECH_STACK } from '@/constants'
+import SEO from '@/components/common/SEO'
+import { SEO_CONFIG, SITE_INFO } from '@/constants/seo'
+import PageTransition from '@/components/common/PageTransition'
 
 /**
  * 首页 Hero 模块 - 美式极简风格

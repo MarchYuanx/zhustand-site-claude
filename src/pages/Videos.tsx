@@ -1,8 +1,8 @@
-import VideoCard from '../components/features/VideoCard'
-import { videos } from '../constants/videos'
-import SEO from '../components/common/SEO'
-import { SEO_CONFIG, SITE_INFO } from '../constants/seo'
-import PageTransition from '../components/common/PageTransition'
+import VideoCard from '@/components/features/VideoCard'
+import { videos } from '@/constants/videos'
+import SEO from '@/components/common/SEO'
+import { SEO_CONFIG, SITE_INFO } from '@/constants/seo'
+import PageTransition from '@/components/common/PageTransition'
 
 /**
  * 视频作品展示页
