@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 interface GitHubContributionsProps {
   username: string
 }
@@ -9,9 +11,11 @@ interface GitHubContributionsProps {
  * 设计要点：
  * - 简洁的卡片布局
  * - 响应式设计
- * - 加载状态处理
+ * - 优雅的加载状态
  */
 function GitHubContributions({ username }: GitHubContributionsProps) {
+  const [isLoading, setIsLoading] = useState(true)
+
   return (
     <div className="w-full">
       {/* 标题 - 优雅字体 */}
@@ -20,12 +24,25 @@ function GitHubContributions({ username }: GitHubContributionsProps) {
       </h2>
 
       {/* 贡献图表卡片 */}
-      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 shadow-card transition-all duration-200 hover:shadow-soft">
+      <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 shadow-card transition-all duration-200 hover:shadow-soft">
+        {/* Loading 骨架屏 */}
+        {isLoading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-white">
+            <div className="flex flex-col items-center gap-3">
+              <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-200 border-t-primary"></div>
+              <p className="text-sm text-text-tertiary">Loading contributions...</p>
+            </div>
+          </div>
+        )}
+
+        {/* 贡献图表 */}
         <img
           src={`https://ghchart.rshah.org/${username}`}
           alt="GitHub Contributions"
           className="w-full"
           loading="lazy"
+          onLoad={() => setIsLoading(false)}
+          onError={() => setIsLoading(false)}
         />
       </div>
 
@@ -35,6 +52,7 @@ function GitHubContributions({ username }: GitHubContributionsProps) {
           href={`https://github.com/${username}`}
           target="_blank"
           rel="noopener noreferrer"
+
           className="inline-flex items-center gap-1 text-sm text-text-tertiary transition-colors duration-200 hover:text-primary"
         >
           <span>View Full Profile</span>

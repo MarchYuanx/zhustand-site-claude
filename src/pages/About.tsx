@@ -1,6 +1,5 @@
-import { FaGithub, FaEnvelope } from 'react-icons/fa'
-import { SiBilibili, SiXiaohongshu } from 'react-icons/si'
 import GitHubContributions from '../components/features/GitHubContributions'
+import SocialLinks from '../components/features/SocialLinks'
 
 /**
  * About Me 页面 - 美式极简风格
@@ -8,41 +7,11 @@ import GitHubContributions from '../components/features/GitHubContributions'
  * 设计要点：
  * - 居中布局，充足留白
  * - 简洁的自我介绍
- * - 卡片式社交信息展示
+ * - GitHub 贡献日历展示
+ * - 社交链接展示
  * - 柔和的视觉效果
  */
 function About() {
-  const socialCards = [
-    {
-      name: 'GitHub',
-      username: 'MarchYuanx',
-      url: 'https://github.com/MarchYuanx',
-      icon: FaGithub,
-      color: 'text-gray-900',
-    },
-    {
-      name: 'Email',
-      username: 'marchyuanx@foxmail.com',
-      url: 'mailto:marchyuanx@foxmail.com',
-      icon: FaEnvelope,
-      color: 'text-blue-500',
-    },
-    {
-      name: '小红书',
-      username: '翔翔寄_Official',
-      url: 'https://www.xiaohongshu.com/user/profile/60cf61900000000001000cd5',
-      icon: SiXiaohongshu,
-      color: 'text-red-500',
-    },
-    {
-      name: 'B站',
-      username: '翔翔寄_Official',
-      url: 'https://space.bilibili.com/17178880',
-      icon: SiBilibili,
-      color: 'text-[#00A1D6]',
-    },
-  ]
-
   return (
     <div className="flex min-h-[80vh] flex-col items-center justify-center px-6 py-16">
       {/* 内容区 */}
@@ -71,26 +40,9 @@ function About() {
           <GitHubContributions username="MarchYuanx" />
         </div>
 
-        {/* 社交图标链接 - 底部联系方式 */}
-        <div className="flex items-center justify-center gap-6 border-t border-gray-200 pt-8">
-          {socialCards.map((card) => {
-            const Icon = card.icon
-            const isEmail = card.url.startsWith('mailto:')
-
-            return (
-              <a
-                key={card.name}
-                href={card.url}
-                target={isEmail ? undefined : '_blank'}
-                rel={isEmail ? undefined : 'noopener noreferrer'}
-                title={`${card.name}: ${card.username}`}
-                className={`text-text-secondary transition-all duration-200 hover:scale-110 ${card.color}`}
-                aria-label={card.name}
-              >
-                <Icon className="h-6 w-6" />
-              </a>
-            )
-          })}
+        {/* 社交链接 - 底部联系方式 */}
+        <div className="flex justify-center border-t border-gray-200 pt-8">
+          <SocialLinks />
         </div>
       </div>
     </div>
