@@ -1,5 +1,6 @@
 import { FaGithub, FaEnvelope } from 'react-icons/fa'
 import { SiBilibili, SiXiaohongshu } from 'react-icons/si'
+import GitHubContributions from '../components/features/GitHubContributions'
 
 /**
  * About Me 页面 - 美式极简风格
@@ -45,18 +46,18 @@ function About() {
   return (
     <div className="flex min-h-[80vh] flex-col items-center justify-center px-6 py-16">
       {/* 内容区 */}
-      <div className="w-full max-w-3xl">
+      <div className="w-full max-w-4xl">
         {/* 标题 - 艺术字体 */}
-        <h1 className="mb-6 text-center font-serif text-4xl font-bold tracking-tight text-text-primary md:text-5xl">
+        <h1 className="mb-8 text-center font-serif text-4xl font-bold tracking-tight text-text-primary md:text-5xl">
           About Me
         </h1>
 
         {/* 简介文字 - 优雅字体 */}
-        <div className="mb-16 space-y-3 text-center">
-          <p className="font-serif text-2xl tracking-wide text-text-secondary">
+        <div className="mb-16 space-y-4 text-center">
+          <p className="font-serif text-3xl tracking-wide text-text-secondary">
             Hi, I&apos;m Zustand 😄
           </p>
-          <p className="mx-auto max-w-xl text-base leading-relaxed text-text-tertiary">
+          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-text-tertiary">
             曾用名 March Yuanx
             <br />
             AI 全栈工程师，热爱用代码和创作记录生活。
@@ -65,8 +66,13 @@ function About() {
           </p>
         </div>
 
-        {/* 社交信息卡片网格 */}
-        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
+        {/* GitHub 贡献日历 */}
+        <div className="mb-12">
+          <GitHubContributions username="MarchYuanx" />
+        </div>
+
+        {/* 社交图标链接 - 底部联系方式 */}
+        <div className="flex items-center justify-center gap-6 border-t border-gray-200 pt-8">
           {socialCards.map((card) => {
             const Icon = card.icon
             const isEmail = card.url.startsWith('mailto:')
@@ -77,17 +83,11 @@ function About() {
                 href={card.url}
                 target={isEmail ? undefined : '_blank'}
                 rel={isEmail ? undefined : 'noopener noreferrer'}
-                className="group flex flex-col items-center rounded-xl border border-gray-200 bg-white p-5 transition-all duration-200 hover:scale-105 hover:border-gray-300 hover:shadow-card"
+                title={`${card.name}: ${card.username}`}
+                className={`text-text-secondary transition-all duration-200 hover:scale-110 ${card.color}`}
+                aria-label={card.name}
               >
-                {/* 图标 */}
-                <div className={`mb-3 flex h-16 w-16 items-center justify-center rounded-xl bg-surface-secondary ${card.color}`}>
-                  <Icon className="h-8 w-8" />
-                </div>
-
-                {/* 账号名称 */}
-                <p className="w-full break-all text-center text-xs text-text-tertiary transition-colors duration-200 group-hover:text-text-secondary">
-                  {card.username}
-                </p>
+                <Icon className="h-6 w-6" />
               </a>
             )
           })}
