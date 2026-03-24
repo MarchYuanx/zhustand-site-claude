@@ -773,4 +773,4 @@ VITE_API_BASE_URL=https://api.example.com
 **文档版本**: 1.0
 **最后更新**: 2026-03-24
 **维护者**: Claude Sonnet 4.6
-**项目地址**: [GitHub](https://github.com/yourusername/zhustand-portfolio)
+**项目地址**: [GitHub](https://github.com/MarchYuanx/zhustand-site-claude)

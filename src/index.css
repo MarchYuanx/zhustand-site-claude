@@ -84,6 +84,16 @@
   .link-hover {
     @apply transition-all duration-200 hover:scale-110 hover:text-primary;
   }
+
+  /* Markdown 行内代码样式（排除 pre 内的块级代码） */
+  .markdown-body :not(pre) > code {
+    @apply rounded-md border border-gray-200 bg-gray-100 px-1.5 py-0.5 font-mono text-pink-600;
+    font-size: 0.85em;
+  }
+
+  .dark .markdown-body :not(pre) > code {
+    @apply border-gray-700 bg-gray-800 text-pink-400;
+  }
 }
 
 /* 工具类扩展 */
