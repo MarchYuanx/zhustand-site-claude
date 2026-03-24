@@ -32,6 +32,79 @@ interface TocItem {
   level: number
 }
 
+// 生成标题 id 的辅助函数
+const toHeadingId = (children: React.ReactNode) =>
+  children?.toString().toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-\u4e00-\u9fa5]/g, '')
+
+// 提取为模块级常量，避免每次渲染重建
+const markdownComponents = {
+  h1: ({ children, ...props }: any) => {
+    const id = toHeadingId(children)
+    return <h1 id={id} className="mb-6 mt-8 scroll-mt-24 font-serif text-3xl font-bold tracking-tight text-text-primary dark:text-gray-100" {...props}>{children}</h1>
+  },
+  h2: ({ children, ...props }: any) => {
+    const id = toHeadingId(children)
+    return <h2 id={id} className="mb-4 mt-8 scroll-mt-24 font-serif text-2xl font-bold tracking-tight text-text-primary dark:text-gray-100" {...props}>{children}</h2>
+  },
+  h3: ({ children, ...props }: any) => {
+    const id = toHeadingId(children)
+    return <h3 id={id} className="mb-3 mt-6 scroll-mt-24 font-serif text-xl font-semibold tracking-wide text-text-primary dark:text-gray-100" {...props}>{children}</h3>
+  },
+  p: (props: any) => (
+    <p className="mb-4 leading-relaxed text-text-secondary dark:text-gray-300" {...props} />
+  ),
+  ul: (props: any) => (
+    <ul className="mb-4 ml-6 list-disc space-y-2 text-text-secondary dark:text-gray-300" {...props} />
+  ),
+  ol: (props: any) => (
+    <ol className="mb-4 ml-6 list-decimal space-y-2 text-text-secondary dark:text-gray-300" {...props} />
+  ),
+  li: (props: any) => (
+    <li className="leading-relaxed" {...props} />
+  ),
+  code: ({ inline, ...props }: any) =>
+    inline ? (
+      <code className="rounded bg-surface-elevated px-1.5 py-0.5 font-mono text-sm text-primary dark:bg-gray-800 dark:text-blue-400" {...props} />
+    ) : (
+      <code className="block rounded-xl bg-surface-elevated p-4 font-mono text-sm leading-relaxed dark:bg-gray-800" {...props} />
+    ),
+  pre: (props: any) => (
+    <pre className="mb-4 overflow-x-auto rounded-xl bg-surface-elevated p-4 shadow-soft dark:bg-gray-800" {...props} />
+  ),
+  blockquote: (props: any) => (
+    <blockquote className="mb-4 border-l-4 border-primary bg-surface-elevated pl-4 py-2 italic text-text-secondary dark:bg-gray-800 dark:text-gray-300" {...props} />
+  ),
+  table: (props: any) => (
+    <div className="mb-4 overflow-x-auto rounded-xl shadow-soft">
+      <table className="w-full border-collapse" {...props} />
+    </div>
+  ),
+  thead: (props: any) => (
+    <thead className="bg-surface-elevated dark:bg-gray-800" {...props} />
+  ),
+  th: (props: any) => (
+    <th className="border border-border px-4 py-2 text-left font-semibold text-text-primary dark:border-gray-700 dark:text-gray-100" {...props} />
+  ),
+  td: (props: any) => (
+    <td className="border border-border px-4 py-2 text-text-secondary dark:border-gray-700 dark:text-gray-300" {...props} />
+  ),
+  hr: (props: any) => (
+    <hr className="my-8 border-border dark:border-gray-700" {...props} />
+  ),
+  img: (props: any) => (
+    <img {...props} className="my-4 rounded-xl shadow-card" loading="lazy" />
+  ),
+  a: (props: any) => (
+    <a {...props} className="font-medium text-primary transition-colors hover:underline" target="_blank" rel="noopener noreferrer" />
+  ),
+  strong: (props: any) => (
+    <strong className="font-semibold text-text-primary dark:text-gray-100" {...props} />
+  ),
+  em: (props: any) => (
+    <em className="italic text-text-secondary dark:text-gray-300" {...props} />
+  ),
+}
+
 function ArticleDetail() {
   const { id } = useParams()
   const [article, setArticle] = useState<ArticleData | null>(null)
@@ -43,10 +116,15 @@ function ArticleDetail() {
 
   useEffect(() => {
     async function fetchArticle() {
-      const articles = await loadArticles()
-      const found = articles.find((a) => a.id === id)
-      setArticle(found || null)
-      setLoading(false)
+      try {
+        const articles = await loadArticles()
+        const found = articles.find((a) => a.id === id)
+        setArticle(found || null)
+      } catch (error) {
+        console.error('Failed to load article:', error)
+      } finally {
+        setLoading(false)
+      }
     }
     fetchArticle()
   }, [id])
@@ -201,83 +279,7 @@ function ArticleDetail() {
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeHighlight]}
-            components={{
-              // 标题渲染 - 添加 id 用于目录跳转
-              h1: ({ children, ...props }) => {
-                const id = children?.toString().toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-\u4e00-\u9fa5]/g, '')
-                return <h1 id={id} className="mb-6 mt-8 scroll-mt-24 font-serif text-3xl font-bold tracking-tight text-text-primary dark:text-gray-100" {...props}>{children}</h1>
-              },
-              h2: ({ children, ...props }) => {
-                const id = children?.toString().toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-\u4e00-\u9fa5]/g, '')
-                return <h2 id={id} className="mb-4 mt-8 scroll-mt-24 font-serif text-2xl font-bold tracking-tight text-text-primary dark:text-gray-100" {...props}>{children}</h2>
-              },
-              h3: ({ children, ...props }) => {
-                const id = children?.toString().toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-\u4e00-\u9fa5]/g, '')
-                return <h3 id={id} className="mb-3 mt-6 scroll-mt-24 font-serif text-xl font-semibold tracking-wide text-text-primary dark:text-gray-100" {...props}>{children}</h3>
-              },
-              // 段落渲染
-              p: (props) => (
-                <p className="mb-4 leading-relaxed text-text-secondary dark:text-gray-300" {...props} />
-              ),
-              // 列表渲染
-              ul: (props) => (
-                <ul className="mb-4 ml-6 list-disc space-y-2 text-text-secondary dark:text-gray-300" {...props} />
-              ),
-              ol: (props) => (
-                <ol className="mb-4 ml-6 list-decimal space-y-2 text-text-secondary dark:text-gray-300" {...props} />
-              ),
-              li: (props) => (
-                <li className="leading-relaxed" {...props} />
-              ),
-              // 代码块渲染
-              code: ({ inline, ...props }: any) =>
-                inline ? (
-                  <code className="rounded bg-surface-elevated px-1.5 py-0.5 font-mono text-sm text-primary dark:bg-gray-800 dark:text-blue-400" {...props} />
-                ) : (
-                  <code className="block rounded-xl bg-surface-elevated p-4 font-mono text-sm leading-relaxed dark:bg-gray-800" {...props} />
-                ),
-              pre: (props) => (
-                <pre className="mb-4 overflow-x-auto rounded-xl bg-surface-elevated p-4 shadow-soft dark:bg-gray-800" {...props} />
-              ),
-              // 引用块渲染
-              blockquote: (props) => (
-                <blockquote className="mb-4 border-l-4 border-primary bg-surface-elevated pl-4 py-2 italic text-text-secondary dark:bg-gray-800 dark:text-gray-300" {...props} />
-              ),
-              // 表格渲染
-              table: (props) => (
-                <div className="mb-4 overflow-x-auto rounded-xl shadow-soft">
-                  <table className="w-full border-collapse" {...props} />
-                </div>
-              ),
-              thead: (props) => (
-                <thead className="bg-surface-elevated dark:bg-gray-800" {...props} />
-              ),
-              th: (props) => (
-                <th className="border border-border px-4 py-2 text-left font-semibold text-text-primary dark:border-gray-700 dark:text-gray-100" {...props} />
-              ),
-              td: (props) => (
-                <td className="border border-border px-4 py-2 text-text-secondary dark:border-gray-700 dark:text-gray-300" {...props} />
-              ),
-              // 分割线渲染
-              hr: (props) => (
-                <hr className="my-8 border-border dark:border-gray-700" {...props} />
-              ),
-              // 图片渲染 - 响应式适配
-              img: (props) => (
-                <img {...props} className="my-4 rounded-xl shadow-card" loading="lazy" />
-              ),
-              // 链接渲染
-              a: (props) => (
-                <a {...props} className="font-medium text-primary transition-colors hover:underline" target="_blank" rel="noopener noreferrer" />
-              ),
-              // 强调文本
-              strong: (props) => (
-                <strong className="font-semibold text-text-primary dark:text-gray-100" {...props} />
-              ),
-              em: (props) => (
-                <em className="italic text-text-secondary dark:text-gray-300" {...props} />
-              ),
-            }}
+            components={markdownComponents}
           >
             {article.content}
           </ReactMarkdown>

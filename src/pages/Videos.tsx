@@ -42,7 +42,7 @@ function Videos() {
       {/* 视频网格 - 两栏布局 */}
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         {videos.map((video, index) => (
-          <VideoCard key={index} url={video.url} title={video.title} />
+          <VideoCard key={video.url} url={video.url} title={video.title} />
         ))}
       </div>
     </div>

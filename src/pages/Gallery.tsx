@@ -26,15 +26,20 @@ function Gallery() {
 
   useEffect(() => {
     async function fetchImages() {
-      const loadedImages = await loadImages()
-      // 合并图片元数据
-      const imagesWithMetadata = loadedImages.map((image: ImageData) => {
-        const filename = image.src.split('/').pop() || ''
-        const metadata = getImageMetadata(filename)
-        return { ...image, ...metadata }
-      })
-      setImages(imagesWithMetadata)
-      setLoading(false)
+      try {
+        const loadedImages = await loadImages()
+        // 合并图片元数据
+        const imagesWithMetadata = loadedImages.map((image: ImageData) => {
+          const filename = image.src.split('/').pop() || ''
+          const metadata = getImageMetadata(filename)
+          return { ...image, ...metadata }
+        })
+        setImages(imagesWithMetadata)
+      } catch (error) {
+        console.error('Failed to load images:', error)
+      } finally {
+        setLoading(false)
+      }
     }
     fetchImages()
   }, [])

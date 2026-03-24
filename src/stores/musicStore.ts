@@ -30,7 +30,7 @@ export const MUSIC_LIST: Music[] = [
     url: 'https://music.163.com/song/media/outer/url?id=2053344480.mp3',
   },
   {
-    id: 667244,
+    id: 445190,
     name: '银河鉄道の夜',
     artist: '久石譲',
     url: 'https://music.163.com/song/media/outer/url?id=445190.mp3',

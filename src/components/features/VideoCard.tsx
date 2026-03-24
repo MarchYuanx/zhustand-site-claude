@@ -59,6 +59,7 @@ function VideoCard({ url, title }: VideoCardProps) {
             scrolling="no"
             frameBorder="no"
             allowFullScreen={true}
+            sandbox="allow-scripts allow-same-origin allow-popups"
             className="absolute left-0 top-0 h-full w-full"
             title={title}
             onLoad={() => setIsLoading(false)}

@@ -41,6 +41,7 @@ export async function getBilibiliVideoInfo(bvid: string): Promise<BilibiliVideoI
         'Referer': 'https://www.bilibili.com',
       }
     })
+    if (!response.ok) return null
     const data = await response.json()
 
     if (data.code === 0 && data.data) {
@@ -118,6 +119,7 @@ export async function getBilibiliUserInfo(mid: number): Promise<BilibiliUserInfo
         'Referer': 'https://www.bilibili.com',
       }
     })
+    if (!response.ok) return null
     const data = await response.json()
 
     if (data.code === 0 && data.data) {

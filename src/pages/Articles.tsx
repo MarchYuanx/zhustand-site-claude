@@ -29,9 +29,14 @@ function Articles() {
 
   useEffect(() => {
     async function fetchArticles() {
-      const loadedArticles = await loadArticles()
-      setArticles(loadedArticles)
-      setLoading(false)
+      try {
+        const loadedArticles = await loadArticles()
+        setArticles(loadedArticles)
+      } catch (error) {
+        console.error('Failed to load articles:', error)
+      } finally {
+        setLoading(false)
+      }
     }
     fetchArticles()
   }, [])
