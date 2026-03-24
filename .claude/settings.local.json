@@ -18,7 +18,15 @@
       "WebSearch",
       "Bash(mkdir -p src/assets/images src/assets/articles)",
       "Bash(mv public/assets/images/* src/assets/images/)",
-      "Bash(mv public/assets/articles/* src/assets/articles/)"
+      "Bash(mv public/assets/articles/* src/assets/articles/)",
+      "Bash(claude mcp:*)",
+      "WebFetch(domain:api.github.com)",
+      "Bash(npx playwright:*)",
+      "mcp__context7__query-docs",
+      "Skill(update-config)",
+      "mcp__playwright__browser_wait_for",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_take_screenshot"
     ]
   }
 }
