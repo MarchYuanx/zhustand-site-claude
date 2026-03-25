@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useState, useEffect, useLayoutEffect, useRef, useMemo } from 'react'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
@@ -27,6 +27,7 @@ const estimateReadingTime = (content: string): number => {
 
 function ArticleDetail() {
   const { id } = useParams()
+  const navigate = useNavigate()
   const [article, setArticle] = useState<ArticleData | null>(null)
   const [loading, setLoading] = useState(true)
   const [toc, setToc] = useState<TocItem[]>([])
@@ -49,7 +50,7 @@ function ArticleDetail() {
     fetchArticle()
   }, [id])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!contentRef.current) return
 
     const headings = contentRef.current.querySelectorAll('h1, h2, h3')
@@ -68,10 +69,15 @@ function ArticleDetail() {
     const element = document.getElementById(id)
     if (!element) return
     setActiveId(id)
-    history.pushState(null, '', `#${id}`)
+    navigate(`#${id}`, { replace: false })
     const top = element.getBoundingClientRect().top + window.scrollY - 96
     window.scrollTo({ top, behavior: 'smooth' })
   }
+
+  const readingTime = useMemo(
+    () => (article ? estimateReadingTime(article.content) : 0),
+    [article]
+  )
 
   if (loading) return <Loading />
 
@@ -170,7 +176,7 @@ function ArticleDetail() {
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  约 {estimateReadingTime(article.content)} 分钟阅读
+                  约 {readingTime} 分钟阅读
                 </span>
               </div>
             </header>

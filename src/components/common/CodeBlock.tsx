@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo, useEffect, useRef } from 'react'
 
 /** 递归提取 React 节点中的纯文本 */
 export const extractText = (node: React.ReactNode): string => {
@@ -11,20 +11,29 @@ export const extractText = (node: React.ReactNode): string => {
 /** 代码块组件：顶栏语言标签 + 一键复制 */
 export default function CodeBlock({ children }: { children: React.ReactNode }) {
   const [copied, setCopied] = useState(false)
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const codeEl = React.Children.toArray(children)[0] as React.ReactElement
-  const className = (codeEl?.props?.className as string) || ''
-  const language =
-    className.split(' ').find((c: string) => c.startsWith('language-'))?.replace('language-', '') || 'text'
+  const { codeEl, language } = useMemo(() => {
+    const el = React.Children.toArray(children)[0] as React.ReactElement
+    const cls = (el?.props?.className as string) || ''
+    const lang = cls.split(' ').find((c: string) => c.startsWith('language-'))?.slice('language-'.length) || 'text'
+    return { codeEl: el, language: lang }
+  }, [children])
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current)
+    }
+  }, [])
 
   const handleCopy = async () => {
     const text = extractText(codeEl?.props?.children)
     try {
       await navigator.clipboard.writeText(text)
       setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+      timerRef.current = setTimeout(() => setCopied(false), 2000)
     } catch {
-      // clipboard 不可用（非 HTTPS 或权限拒绝）时静默失败
+      // intentional no-op — copy is best-effort
     }
   }
 

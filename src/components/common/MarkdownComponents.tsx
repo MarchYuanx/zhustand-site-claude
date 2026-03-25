@@ -3,58 +3,42 @@ import type { Components } from 'react-markdown'
 import CodeBlock from './CodeBlock'
 
 /** 生成标题的 id（用于锚点跳转） */
-const toHeadingId = (children: React.ReactNode) =>
+export const toHeadingId = (children: React.ReactNode) =>
   children?.toString().toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-\u4e00-\u9fa5]/g, '')
+
+const ANCHOR_CLASS = 'ml-2 opacity-0 transition-opacity group-hover:opacity-100 text-primary/40 no-underline'
+
+type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4'
+type HeadingProps = React.HTMLAttributes<HTMLHeadingElement> & { children?: React.ReactNode; node?: unknown }
+
+const makeHeading = (Tag: HeadingTag, className: string) =>
+  ({ children, node: _node, ...props }: HeadingProps) => {
+    const id = toHeadingId(children)
+    return (
+      <Tag {...props} id={id} className={className}>
+        {children}
+        <a href={`#${id}`} className={ANCHOR_CLASS}>#</a>
+      </Tag>
+    )
+  }
 
 /** react-markdown 自定义组件映射 */
 const markdownComponents: Components = {
   // ── 标题：悬停显示锚点 # ──
-  h1: ({ children, node: _node, ...props }) => {
-    const id = toHeadingId(children)
-    return (
-      <h1 {...props} id={id} className="group mb-6 mt-8 scroll-mt-24 text-3xl font-bold tracking-tight text-text-primary dark:text-gray-100">
-        {children}
-        <a href={`#${id}`} className="ml-2 opacity-0 transition-opacity group-hover:opacity-100 text-primary/40 no-underline">#</a>
-      </h1>
-    )
-  },
-  h2: ({ children, node: _node, ...props }) => {
-    const id = toHeadingId(children)
-    return (
-      <h2 {...props} id={id} className="group mb-4 mt-10 scroll-mt-24 text-2xl font-bold tracking-tight text-text-primary dark:text-gray-100">
-        {children}
-        <a href={`#${id}`} className="ml-2 opacity-0 transition-opacity group-hover:opacity-100 text-primary/40 no-underline">#</a>
-      </h2>
-    )
-  },
-  h3: ({ children, node: _node, ...props }) => {
-    const id = toHeadingId(children)
-    return (
-      <h3 {...props} id={id} className="group mb-3 mt-8 scroll-mt-24 text-xl font-semibold text-text-primary dark:text-gray-100">
-        {children}
-        <a href={`#${id}`} className="ml-2 opacity-0 transition-opacity group-hover:opacity-100 text-primary/40 no-underline">#</a>
-      </h3>
-    )
-  },
-  h4: ({ children, node: _node, ...props }) => {
-    const id = toHeadingId(children)
-    return (
-      <h4 {...props} id={id} className="group mb-2 mt-6 scroll-mt-24 text-lg font-semibold text-text-primary dark:text-gray-100">
-        {children}
-        <a href={`#${id}`} className="ml-2 opacity-0 transition-opacity group-hover:opacity-100 text-primary/40 no-underline">#</a>
-      </h4>
-    )
-  },
+  h1: makeHeading('h1', 'group mb-6 mt-8 scroll-mt-24 text-3xl font-bold tracking-tight text-text-primary dark:text-gray-100'),
+  h2: makeHeading('h2', 'group mb-4 mt-10 scroll-mt-24 text-2xl font-bold tracking-tight text-text-primary dark:text-gray-100'),
+  h3: makeHeading('h3', 'group mb-3 mt-8 scroll-mt-24 text-xl font-semibold text-text-primary dark:text-gray-100'),
+  h4: makeHeading('h4', 'group mb-2 mt-6 scroll-mt-24 text-lg font-semibold text-text-primary dark:text-gray-100'),
 
   // ── 段落 & 列表 ──
   p: ({ node: _node, ...props }) => (
     <p className="mb-5 leading-7 text-text-secondary dark:text-gray-300" {...props} />
   ),
   ul: ({ node: _node, ...props }) => (
-    <ul className="mb-5 ml-6 space-y-2 text-text-secondary dark:text-gray-300" style={{ listStyleType: 'disc' }} {...props} />
+    <ul className="mb-5 ml-6 list-disc space-y-2 text-text-secondary dark:text-gray-300" {...props} />
   ),
   ol: ({ node: _node, ...props }) => (
-    <ol className="mb-5 ml-6 space-y-2 text-text-secondary dark:text-gray-300" style={{ listStyleType: 'decimal' }} {...props} />
+    <ol className="mb-5 ml-6 list-decimal space-y-2 text-text-secondary dark:text-gray-300" {...props} />
   ),
   li: ({ node: _node, ...props }) => (
     <li className="leading-7 pl-1" {...props} />
@@ -92,10 +76,10 @@ const markdownComponents: Components = {
     <hr className="my-10 border-border dark:border-gray-700" {...props} />
   ),
   img: ({ alt, node: _node, ...props }) => (
-    <span className="my-6 block">
+    <figure className="my-6">
       <img {...props} alt={alt} className="mx-auto rounded-xl shadow-card" loading="lazy" />
-      {alt && <span className="mt-2 block text-center text-sm text-text-tertiary dark:text-gray-500">{alt}</span>}
-    </span>
+      {alt && <figcaption className="mt-2 text-center text-sm text-text-tertiary dark:text-gray-500">{alt}</figcaption>}
+    </figure>
   ),
   a: ({ node: _node, ...props }) => (
     <a {...props} className="font-medium text-primary underline decoration-primary/30 underline-offset-2 transition-colors hover:decoration-primary" target="_blank" rel="noopener noreferrer" />
